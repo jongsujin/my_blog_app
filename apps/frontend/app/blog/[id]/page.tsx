@@ -1,17 +1,10 @@
 import { Card, CardContent } from '@/app/components/ui/Card'
+import { Post } from '@/types/post'
 import { ChevronLeft } from 'lucide-react'
 import Image from "next/image"
 import Link from "next/link"
 
-interface Post {
-  id: number
-  title: string
-  date: string
-  description: string
-  gradient: string
-  image: string
-  content: string
-}
+
 
 // 실제 환경에서는 데이터베이스나 CMS에서 가져올 데이터입니다
 const getPost = (id: string): Post => {
@@ -52,8 +45,8 @@ const getPost = (id: string): Post => {
   }
 }
 
-export default function BlogPost({ params }: { params: { id: string } }) {
-  const post = getPost(params.id)
+export default async function BlogPost({ params }: { params: Promise<{ id: string }> }) {
+  const post = getPost((await params).id)
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
