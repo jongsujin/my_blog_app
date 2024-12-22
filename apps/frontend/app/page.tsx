@@ -1,101 +1,132 @@
-import Image from "next/image";
+import Image from "next/image"
+import Link from "next/link"
+import { Card, CardContent } from "./components/ui/Card"
 
-export default function Home() {
+
+export default function BlogPage() {
+  const posts = [
+    {
+      id: 1,
+      title: "Understanding UI Design Principles",
+      date: "March 15, 2024",
+      description: "Learn the fundamental principles that guide effective user interface design and create better experiences.",
+      gradient: "from-yellow-200 via-orange-200 to-red-200",
+      image: "/placeholder.svg?height=200&width=300",
+      featured: true
+    },
+    {
+      id: 2,
+      title: "Choosing the Right Images for Web Design",
+      date: "March 14, 2024",
+      description: "Tips for selecting and optimizing images that enhance your web design.",
+      gradient: "from-blue-200 via-indigo-200 to-purple-200",
+      image: "/placeholder.svg?height=200&width=300"
+    },
+    {
+      id: 3,
+      title: "Creating Professional Headers",
+      date: "February 28, 2024",
+      description: "Learn how to design headers that make a strong first impression.",
+      gradient: "from-pink-200 via-rose-200 to-red-200",
+      image: "/placeholder.svg?height=200&width=300"
+    },
+    {
+      id: 4,
+      title: "Design Inspiration Sources",
+      date: "February 24, 2024",
+      description: "Discover the best resources for design inspiration and creative ideas.",
+      gradient: "from-purple-200 via-violet-200 to-indigo-200",
+      image: "/placeholder.svg?height=200&width=300"
+    },
+    {
+      id: 5,
+      title: "Getting Started with UI Design",
+      date: "February 22, 2024",
+      description: "A beginner's guide to starting your journey in UI design.",
+      gradient: "from-green-200 via-emerald-200 to-teal-200",
+      image: "/placeholder.svg?height=200&width=300"
+    },
+    {
+      id: 6,
+      title: "Common Questions About UI/UX",
+      date: "February 20, 2024",
+      description: "Answers to frequently asked questions about UI/UX design.",
+      gradient: "from-yellow-100 via-amber-200 to-orange-200",
+      image: "/placeholder.svg?height=200&width=300"
+    },
+    {
+      id: 7,
+      title: "From Developer to Designer",
+      date: "February 18, 2024",
+      description: "The journey of transitioning from development to design.",
+      gradient: "from-blue-100 via-cyan-200 to-teal-200",
+      image: "/placeholder.svg?height=200&width=300"
+    }
+  ]
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="min-h-screen bg-white">
+      {/* Content Section */}
+      <div className="mx-auto max-w-7xl p-6 md:p-8">
+        <div className="space-y-8">
+          {/* Featured Post */}
+          {posts.filter(post => post.featured).map(post => (
+            <Link key={post.id} href={`/blog/${post.id}`}>
+              <Card className="overflow-hidden transition-transform hover:scale-[1.02]">
+                <CardContent className={`bg-gradient-to-br ${post.gradient} p-8`}>
+                  <div className="flex flex-col md:flex-row gap-8">
+                    <div className="w-full md:w-1/3">
+                      <Image
+                        src={post.image}
+                        alt={post.title}
+                        width={300}
+                        height={200}
+                        className="rounded-lg object-cover w-full h-48"
+                      />
+                    </div>
+                    <div className="w-full md:w-2/3">
+                      <p className="text-sm text-gray-700/70">{post.date}</p>
+                      <h2 className="mt-2 text-2xl font-bold text-gray-900 md:text-3xl">
+                        {post.title}
+                      </h2>
+                      <p className="mt-4 text-gray-800/90">
+                        {post.description}
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          {/* Grid of Posts */}
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {posts.filter(post => !post.featured).map(post => (
+              <Link key={post.id} href={`/blog/${post.id}`}>
+                <Card className="overflow-hidden transition-transform hover:scale-[1.02]">
+                  <CardContent className={`bg-gradient-to-br ${post.gradient} p-6`}>
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      width={300}
+                      height={200}
+                      className="rounded-lg object-cover w-full h-40 mb-4"
+                    />
+                    <p className="text-sm text-gray-700/70">{post.date}</p>
+                    <h2 className="mt-2 text-xl font-semibold text-gray-900">
+                      {post.title}
+                    </h2>
+                    <p className="mt-2 text-sm text-gray-800/90">
+                      {post.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
     </div>
-  );
+  )
 }
+
