@@ -1,4 +1,5 @@
 import { Card, CardContent } from '@/app/components/ui/Card'
+import { Tag } from '@/app/components/ui/Tag'
 import { Post } from '@/types/post'
 import { ChevronLeft } from 'lucide-react'
 import Image from "next/image"
@@ -41,7 +42,8 @@ const getPost = (id: string): Post => {
       4. Simplicity
       Keep your designs as simple as possible while still achieving their goals. Remove unnecessary elements 
       and make sure every component serves a purpose.
-    `
+    `,
+    tags: ["Frontend", "Backend", "JavaScript"]
   }
 }
 
@@ -70,6 +72,11 @@ export default async function BlogPost({ params }: { params: Promise<{ id: strin
                   {post.title}
                 </h1>
                 <p className="text-xl text-gray-600">{post.description}</p>
+                <div className="flex flex-wrap gap-2 pt-2">
+               {post.tags.map((tag) => (
+                 <Tag key={tag} tag={tag} />
+               ))}
+             </div>
               </div>
             </CardContent>
           </Card>

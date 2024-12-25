@@ -6,6 +6,5 @@ export interface Post {
     gradient: string
     image: string
     content: string
+    tags: string[]
   }
-
- 
