@@ -32,5 +32,20 @@ export const HEADER_TAB_LIST = [
         id: 6,
         title: "Tag",
         href: "/tag",
+    },
+    {
+        id: 7,
+        title: "Write",
+        href: "/write",
     }
 ]
+
+
+export const PASTEL_GRADIENTS = {
+    blue: "from-blue-200 via-blue-100 to-white",
+    yellow: "from-yellow-200 via-orange-200 to-red-200",
+    purple: "from-purple-200 via-violet-200 to-indigo-200",
+    green: "from-green-200 via-emerald-200 to-teal-200",
+    pink: "from-pink-200 via-rose-200 to-red-200",
+    cyan: "from-cyan-200 via-blue-100 to-teal-200",
+} as const

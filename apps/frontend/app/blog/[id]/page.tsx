@@ -73,10 +73,10 @@ export default async function BlogPost({ params }: { params: Promise<{ id: strin
                 </h1>
                 <p className="text-xl text-gray-600">{post.description}</p>
                 <div className="flex flex-wrap gap-2 pt-2">
-               {post.tags.map((tag) => (
-                 <Tag key={tag} tag={tag} />
-               ))}
-             </div>
+                  {post.tags.map((tag) => (
+                    <Tag key={tag} tag={tag} />
+                  ))}
+                </div>
               </div>
             </CardContent>
           </Card>
