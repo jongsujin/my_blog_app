@@ -1,7 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import Editor from "../components/ui/Editor"
+import Editor from "../../shared/component/ui/Editor"
+import Background from "@/shared/component/ui/Background"
 
 export default function WritePage() {
     const [title, setTitle] = useState("")
@@ -68,7 +69,7 @@ export default function WritePage() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+        <Background>
             <div className="mx-auto max-w-4xl p-6 md:p-8">
                 {/* 제목 입력 */}
                 <input
@@ -125,6 +126,6 @@ export default function WritePage() {
                     </button>
                 </div>
             </div>
-        </div>
+        </Background>
     )
 }

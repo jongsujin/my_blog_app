@@ -1,8 +1,5 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import { Tag } from '../components/ui/Tag'
-import { Card, CardContent } from '../components/ui/Card'
 import Item from '@/shared/component/Item'
+import Background from '@/shared/component/ui/Background'
 
 
 const projects = [
@@ -40,11 +37,11 @@ const projects = [
     }
 ]
 
-export default function PortfolioPage() {
+export default function TechPage() {
     return (
-        <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+        <Background>
             <div className="container mx-auto px-4 py-16">
-                <h1 className="text-blue-300 text-start text-4xl font-bold text-center mb-12">My Portfolio</h1>
+                <h1 className="text-blue-300 text-start text-4xl font-bold  mb-12">My Tech</h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {projects.map((project) => (
                         <Item
@@ -55,7 +52,8 @@ export default function PortfolioPage() {
                     ))}
                 </div>
             </div>
-        </div>
+
+        </Background>
     )
 }
 

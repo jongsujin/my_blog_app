@@ -2,8 +2,8 @@
  * 포트폴리오 및 게시글 아이템
  */
 
-import { Card, CardContent } from "@/app/components/ui/Card";
-import { Tag } from "@/app/components/ui/Tag";
+import { Card, CardContent } from "@/shared/component/ui/Card";
+import { Tag } from "@/shared/component/ui/Tag";
 import Link from "next/link";
 import Image from "next/image";
 

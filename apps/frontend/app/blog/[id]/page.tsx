@@ -1,5 +1,7 @@
-import { Card, CardContent } from '@/app/components/ui/Card'
-import { Tag } from '@/app/components/ui/Tag'
+import Background from '@/shared/component/ui/Background'
+import { Card, CardContent } from '@/shared/component/ui/Card'
+import CommentForm from '@/shared/component/ui/CommentForm'
+import { Tag } from '@/shared/component/ui/Tag'
 import { Post } from '@/types/post'
 import { ChevronLeft } from 'lucide-react'
 import Image from "next/image"
@@ -49,9 +51,10 @@ const getPost = (id: string): Post => {
 
 export default async function BlogPost({ params }: { params: Promise<{ id: string }> }) {
   const post = getPost((await params).id)
-
+  const resolvedParams = await params;
+  console.log(resolvedParams)
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+    <Background>
       <div className="mx-auto max-w-4xl p-6 md:p-8">
         {/* Back Button */}
         <Link
@@ -120,7 +123,9 @@ export default async function BlogPost({ params }: { params: Promise<{ id: strin
           </div>
         </article>
       </div>
-    </div>
+      <CommentForm />
+
+    </Background>
   )
 }
 

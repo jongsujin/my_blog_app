@@ -5,7 +5,7 @@ import React from 'react'
 
 export function Card({ className = '', children }: CardProps) {
   return (
-    <div className={`bg-white rounded-lg shadow-md overflow-hidden ${className}`}>
+    <div className={`bg-gray-50 rounded-lg shadow-md overflow-hidden ${className}`}>
       {children}
     </div>
   )

@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
-import { Card, CardContent } from "./components/ui/Card"
+import { Card, CardContent } from "../shared/component/ui/Card"
+import Background from "@/shared/component/ui/Background"
 
 
 export default function BlogPage() {
@@ -10,7 +11,7 @@ export default function BlogPage() {
       title: "Understanding UI Design Principles",
       date: "March 15, 2024",
       description: "Learn the fundamental principles that guide effective user interface design and create better experiences.",
-      gradient: "from-yellow-200 via-orange-200 to-red-200",
+      gradient: "from-blue-200 via-indigo-200 to-purple-200",
       image: "/placeholder.svg?height=200&width=300",
       featured: true
     },
@@ -19,7 +20,7 @@ export default function BlogPage() {
       title: "Choosing the Right Images for Web Design",
       date: "March 14, 2024",
       description: "Tips for selecting and optimizing images that enhance your web design.",
-      gradient: "from-blue-200 via-indigo-200 to-purple-200",
+      gradient: "from-slate-800 via-slate-700 to-blue-900", // 다크모드 색상
       image: "/placeholder.svg?height=200&width=300"
     },
     {
@@ -65,27 +66,27 @@ export default function BlogPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-white">
+    <Background>
       {/* Content Section */}
-      <div className="mx-auto max-w-7xl p-6 md:p-8">
+      <div className="mx-auto max-w-6xl p-6 md:p-8">
         <div className="space-y-8">
           {/* Featured Post */}
           {posts.filter(post => post.featured).map(post => (
             <Link key={post.id} href={`/blog/${post.id}`}>
               <Card className="overflow-hidden transition-transform hover:scale-[1.02]">
-                <CardContent className={`bg-gradient-to-br ${post.gradient} p-8`}>
-                  <div className="flex flex-col md:flex-row gap-8">
-                    <div className="w-full md:w-1/3">
+                <CardContent className="p-0">
+                  <div className="h-72 flex flex-col md:flex-row">
+                    <div className={`w-full md:w-1/3 bg-gradient-to-br ${post.gradient} p-8`}>
                       {/* <Image
-                        src={post.image}
-                        alt={post.title}
-                        width={300}
-                        height={200}
-                        className="rounded-lg object-cover w-full h-48"
-                      /> */}
+            src={post.image}
+            alt={post.title}
+            width={300}
+            height={200}
+            className="rounded-lg object-cover w-full h-48"
+          /> */}
                       <div className="w-full h-48 bg-gray-200"></div>
                     </div>
-                    <div className="w-full md:w-2/3">
+                    <div className="w-full md:w-2/3 bg-white p-8">
                       <p className="text-sm text-gray-700/70">{post.date}</p>
                       <h2 className="mt-2 text-2xl font-bold text-gray-900 md:text-3xl">
                         {post.title}
@@ -105,21 +106,26 @@ export default function BlogPage() {
             {posts.filter(post => !post.featured).map(post => (
               <Link key={post.id} href={`/blog/${post.id}`}>
                 <Card className="overflow-hidden transition-transform hover:scale-[1.02]">
-                  <CardContent className={`bg-gradient-to-br ${post.gradient} p-6`}>
-                    <Image
-                      src={post.image}
-                      alt={post.title}
-                      width={300}
-                      height={200}
-                      className="rounded-lg object-cover w-full h-40 mb-4"
-                    />
-                    <p className="text-sm text-gray-700/70">{post.date}</p>
-                    <h2 className="mt-2 text-xl font-semibold text-gray-900">
-                      {post.title}
-                    </h2>
-                    <p className="mt-2 text-sm text-gray-800/90">
-                      {post.description}
-                    </p>
+                  <CardContent className="p-0">
+                    <div className={`bg-gradient-to-br ${post.gradient} p-6`}>
+                      {/* <Image
+                        src={post.image}
+                        alt={post.title}
+                        width={300}
+                        height={200}
+                        className="rounded-lg object-cover w-full h-40"
+                      /> */}
+                      <div className="w-full h-48 bg-gray-200"></div>
+                    </div>
+                    <div className="bg-white p-6">
+                      <p className="text-sm text-gray-700/70">{post.date}</p>
+                      <h2 className="mt-2 text-xl font-semibold text-gray-900">
+                        {post.title}
+                      </h2>
+                      <p className="mt-2 text-sm text-gray-800/90">
+                        {post.description}
+                      </p>
+                    </div>
                   </CardContent>
                 </Card>
               </Link>
@@ -127,7 +133,7 @@ export default function BlogPage() {
           </div>
         </div>
       </div>
-    </div>
+    </Background>
   )
 }
 
