@@ -14,10 +14,10 @@ const config: Config = {
         'cardColor': '#2a2a2a',
         'textColor': "#e5e7eb",
         'white': "#ffffff",
-        'hoverColor': "#9ca3af",
+        'hoverColor': "#93c5fd",
       },
       backgroundImage: {
-        'primary-gradient': 'linear-gradient(to bottom right, #93c5fd, #a5b4fc, #e9d5ff)',
+        'primary-gradient': 'linear-gradient(to bottom right, #1a1a1a, #2a2a2a, #ffffff)',
       },
 
     },

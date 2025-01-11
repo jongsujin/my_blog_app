@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Editor from "../../shared/component/ui/Editor"
 import Background from "@/shared/component/ui/Background"
+import Button from "@/shared/component/ui/Button"
 
 export default function WritePage() {
     const [title, setTitle] = useState("")
@@ -77,7 +78,7 @@ export default function WritePage() {
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     placeholder="제목을 입력하세요..."
-                    className="w-full border border-gray-300 p-2 mb-4 bg-transparent text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border border-borderColor p-2 mb-4 bg-transparent text-textColor focus:outline-none focus:ring-2 focus:ring-hoverColor"
                 />
 
 
@@ -92,12 +93,12 @@ export default function WritePage() {
                         {tags.map((tag, index) => (
                             <span
                                 key={index}
-                                className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-sm flex items-center"
+                                className="bg-primary-gradient text-textColor px-4 py-1 rounded-full text-sm flex items-center"
                             >
                                 #{tag}
                                 <button
                                     onClick={() => removeTag(tag)}
-                                    className="ml-1 text-blue-600 hover:text-blue-800"
+                                    className="ml-1 text-textColor hover:text-hoverColor"
                                 >
                                     ×
                                 </button>
@@ -109,21 +110,11 @@ export default function WritePage() {
                             onChange={(e) => setCurrentTag(e.target.value)}
                             onKeyPress={handleAddTag}
                             placeholder="Tag.."
-                            className="bg-transparent text-gray-500 placeholder-gray-400 focus:outline-none min-w-10 "
+                            className="bg-transparent text-textColor placeholder-textColor focus:outline-none min-w-10 "
                         />
                     </div>
-                    <button
-                        onClick={handleDraft}
-                        className="px-4 py-2 text-gray-600 border border-gray-300 rounded hover:bg-gray-100"
-                    >
-                        임시저장
-                    </button>
-                    <button
-                        onClick={handlePublish}
-                        className="px-4 py-2 bg-blue-300  text-white rounded hover:bg-blue-400"
-                    >
-                        저장하기
-                    </button>
+                    <Button content="임시저장" />
+                    <Button content="저장하기" />
                 </div>
             </div>
         </Background>

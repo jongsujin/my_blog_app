@@ -24,14 +24,13 @@ export default function Editor({ value, onChange }: EditorProps) {
     }), [])
 
     return (
-        <div className="text-black h-96">
+        <div className="text-textColor h-96">
             <ReactQuill
                 theme="snow"
                 modules={modules}
                 value={value}
                 onChange={onChange}
-                placeholder="내용을 입력하세요..."
-                className="text-black [&_.ql-editor]:text-black h-full [&_.ql-container]:h-[calc(100%-42px)]"
+                className="text-textColor [&_.ql-editor]:text-textColor h-full [&_.ql-container]:h-[calc(100%-42px)]"
             />
         </div>
     )

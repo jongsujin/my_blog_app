@@ -1,7 +1,7 @@
-import Image from "next/image"
 import Link from "next/link"
 import { Card, CardContent } from "../shared/component/ui/Card"
 import Background from "@/shared/component/ui/Background"
+import DropDown from "@/shared/component/ui/DropDown"
 
 
 export default function BlogPage() {
@@ -73,6 +73,12 @@ export default function BlogPage() {
     <Background>
       {/* Content Section */}
       <div className="mx-auto max-w-6xl p-6 md:p-8">
+        <div className="w-full rounded-md p-1 mb-6 flex justify-end">
+          <div className="flex-1"></div>
+          <div className="flex-0">
+            <DropDown />
+          </div>
+        </div>
         <div className="space-y-8">
           {/* Featured Post */}
           {posts.filter(post => post.featured).map(post => (

@@ -1,9 +1,5 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import { Tag } from '../../shared/component/ui/Tag'
-import { Card, CardContent } from '../../shared/component/ui/Card'
-import Item from '@/shared/component/ui/Item'
 import Background from '@/shared/component/ui/Background'
+import Item from '@/shared/component/ui/Item'
 
 
 const projects = [
@@ -73,17 +69,17 @@ const projects = [
     }
 ]
 
-export default function PortfolioPage() {
+export default function LifePage() {
     return (
         <Background>
             <div className="container mx-auto px-4 py-16">
-                <h1 className="text-textColor text-start text-4xl font-bold  mb-12">My Portfolio</h1>
+                <h1 className="text-textColor text-start text-4xl font-bold mb-12">My Life</h1>
                 <div className="grid grid-cols-3 gap-8">
                     {projects.map((project) => (
                         <Item
                             key={project.id}
                             {...project}
-                            buttonText="프로젝트 보기"
+                            buttonText="상세 게시글 보기"
                         />
                     ))}
                 </div>
