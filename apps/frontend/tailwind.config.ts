@@ -12,7 +12,9 @@ const config: Config = {
       colors: {
         'backgroundColor': '#1a1a1a',
         'cardColor': '#2a2a2a',
-        'textColor': "#9ca3af",
+        'textColor': "#e5e7eb",
+        'white': "#ffffff",
+        'hoverColor': "#9ca3af",
       },
       backgroundImage: {
         'primary-gradient': 'linear-gradient(to bottom right, #93c5fd, #a5b4fc, #e9d5ff)',

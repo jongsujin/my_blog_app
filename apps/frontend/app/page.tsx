@@ -88,14 +88,14 @@ export default function BlogPage() {
             height={200}
             className="rounded-lg object-cover w-full h-48"
           /> */}
-                      <div className="w-full h-full bg-gray-200"></div>
+                      <div className="w-full h-full bg-textColor"></div>
                     </div>
                     <div className="w-full md:w-2/3 p-8">
-                      <p className="text-sm text-gray-200">{post.date}</p>
-                      <h2 className="mt-2 text-2xl font-bold text-gray-200 md:text-3xl">
+                      <p className="text-sm text-textColor">{post.date}</p>
+                      <h2 className="mt-2 text-2xl font-bold text-textColor md:text-3xl">
                         {post.title}
                       </h2>
-                      <p className="mt-4  text-gray-200">
+                      <p className="mt-4  text-textColor">
                         {post.description}
                       </p>
                     </div>
@@ -119,14 +119,14 @@ export default function BlogPage() {
                         height={200}
                         className="rounded-lg object-cover w-full h-40"
                       /> */}
-                      <div className="w-full h-48 bg-gray-200"></div>
+                      <div className="w-full h-48 bg-textColor"></div>
                     </div>
-                    <div className="text-gray-200 p-6">
-                      <p className="text-sm text-gray-200">{post.date}</p>
-                      <h2 className="mt-2 text-xl font-semibold text-gray-200">
+                    <div className="text-textColor p-6">
+                      <p className="text-sm text-textColor">{post.date}</p>
+                      <h2 className="mt-2 text-xl font-semibold text-textColor">
                         {post.title}
                       </h2>
-                      <p className="mt-2 text-sm text-gray-200">
+                      <p className="mt-2 text-sm text-textColor">
                         {post.description}
                       </p>
                     </div>

@@ -14,7 +14,7 @@ export function Header() {
 
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-[#1a1a1a] bg-opacity-90 border-b border-white transition-opacity duration-300">
+    <header className="sticky top-0 z-50 w-full bg-backgroundColor bg-opacity-90 border-b border-white transition-opacity duration-300">
       <div className="container flex items-center h-16 justify-between space-x-4 sm:justify-between sm:space-x-0">
         <div className="flex items-center space-x-4">
           <Link href="/" className="flex items-center space-x-2 ml-5">
@@ -29,10 +29,10 @@ export function Header() {
             <Link
               href={header.href}
               key={header.id}
-              className={`text-sm font-medium transition-colors hover:text-gray-400
+              className={`text-sm font-medium transition-colors hover:text-hoverColor
                ${pathname === header.href
-                  ? 'text-white border-b-2 border-gray-400'
-                  : 'text-white'
+                  ? 'text-white border-b-2 border-white'
+                  : 'text-textColor'
                 }`}
             >
               {header.title}
@@ -43,13 +43,13 @@ export function Header() {
         <div className="flex items-center space-x-4">
           <button
             onClick={() => { }}
-            className="rounded-lg p-2 hover:bg-gray-100 dark:hover:bg-gray-800"
+            className="rounded-lg p-2 hover:bg-hoverColor"
             aria-label="Toggle theme"
           >
             {theme === 'light' ? (
-              <Moon className="h-5 w-5 text-blue-300 dark:text-gray-400" />
+              <Moon className="h-5 w-5" />
             ) : (
-              <Sun className="h-5 w-5 text-blue-300 dark:text-gray-400" />
+              <Sun className="h-5 w-5" />
             )}
           </button>
         </div>
