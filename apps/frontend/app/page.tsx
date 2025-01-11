@@ -11,7 +11,7 @@ export default function BlogPage() {
       title: "Understanding UI Design Principles",
       date: "March 15, 2024",
       description: "Learn the fundamental principles that guide effective user interface design and create better experiences.",
-      gradient: "from-blue-200 via-indigo-200 to-purple-200",
+      gradient: "from-blue-200 via-indigo-200 to-blue-50",
       image: "/placeholder.svg?height=200&width=300",
       featured: true
     },
@@ -28,7 +28,8 @@ export default function BlogPage() {
       title: "Creating Professional Headers",
       date: "February 28, 2024",
       description: "Learn how to design headers that make a strong first impression.",
-      gradient: "from-pink-200 via-rose-200 to-red-200",
+      gradient: "from-blue-200 via-indigo-200 to-blue-50",
+
       image: "/placeholder.svg?height=200&width=300"
     },
     {
@@ -36,7 +37,7 @@ export default function BlogPage() {
       title: "Design Inspiration Sources",
       date: "February 24, 2024",
       description: "Discover the best resources for design inspiration and creative ideas.",
-      gradient: "from-purple-200 via-violet-200 to-indigo-200",
+      gradient: "from-blue-200 via-indigo-200 to-blue-50",
       image: "/placeholder.svg?height=200&width=300"
     },
     {
@@ -44,7 +45,8 @@ export default function BlogPage() {
       title: "Getting Started with UI Design",
       date: "February 22, 2024",
       description: "A beginner's guide to starting your journey in UI design.",
-      gradient: "from-green-200 via-emerald-200 to-teal-200",
+      gradient: "from-blue-200 via-indigo-200 to-blue-50",
+
       image: "/placeholder.svg?height=200&width=300"
     },
     {
@@ -52,7 +54,8 @@ export default function BlogPage() {
       title: "Common Questions About UI/UX",
       date: "February 20, 2024",
       description: "Answers to frequently asked questions about UI/UX design.",
-      gradient: "from-yellow-100 via-amber-200 to-orange-200",
+      gradient: "from-blue-200 via-indigo-200 to-blue-50",
+
       image: "/placeholder.svg?height=200&width=300"
     },
     {
@@ -60,7 +63,8 @@ export default function BlogPage() {
       title: "From Developer to Designer",
       date: "February 18, 2024",
       description: "The journey of transitioning from development to design.",
-      gradient: "from-blue-100 via-cyan-200 to-teal-200",
+      gradient: "from-blue-200 via-indigo-200 to-blue-50",
+
       image: "/placeholder.svg?height=200&width=300"
     }
   ]
@@ -73,10 +77,10 @@ export default function BlogPage() {
           {/* Featured Post */}
           {posts.filter(post => post.featured).map(post => (
             <Link key={post.id} href={`/blog/${post.id}`}>
-              <Card className="overflow-hidden transition-transform hover:scale-[1.02]">
+              <Card className={`overflow-hidden transition-transform hover:scale-[1.02]`}>
                 <CardContent className="p-0">
-                  <div className="h-72 flex flex-col md:flex-row">
-                    <div className={`w-full md:w-1/3 bg-gradient-to-br ${post.gradient} p-8`}>
+                  <div className="h-64 flex flex-col md:flex-row">
+                    <div className={`w-full md:w-1/3 pr-5`}>
                       {/* <Image
             src={post.image}
             alt={post.title}
@@ -84,14 +88,14 @@ export default function BlogPage() {
             height={200}
             className="rounded-lg object-cover w-full h-48"
           /> */}
-                      <div className="w-full h-48 bg-gray-200"></div>
+                      <div className="w-full h-full bg-gray-200"></div>
                     </div>
-                    <div className="w-full md:w-2/3 bg-white p-8">
-                      <p className="text-sm text-gray-700/70">{post.date}</p>
-                      <h2 className="mt-2 text-2xl font-bold text-gray-900 md:text-3xl">
+                    <div className="w-full md:w-2/3 p-8">
+                      <p className="text-sm text-gray-200">{post.date}</p>
+                      <h2 className="mt-2 text-2xl font-bold text-gray-200 md:text-3xl">
                         {post.title}
                       </h2>
-                      <p className="mt-4 text-gray-800/90">
+                      <p className="mt-4  text-gray-200">
                         {post.description}
                       </p>
                     </div>
@@ -105,9 +109,9 @@ export default function BlogPage() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {posts.filter(post => !post.featured).map(post => (
               <Link key={post.id} href={`/blog/${post.id}`}>
-                <Card className="overflow-hidden transition-transform hover:scale-[1.02]">
+                <Card className="transition-transform hover:scale-[1.02] ">
                   <CardContent className="p-0">
-                    <div className={`bg-gradient-to-br ${post.gradient} p-6`}>
+                    <div className="mb-2">
                       {/* <Image
                         src={post.image}
                         alt={post.title}
@@ -117,12 +121,12 @@ export default function BlogPage() {
                       /> */}
                       <div className="w-full h-48 bg-gray-200"></div>
                     </div>
-                    <div className="bg-white p-6">
-                      <p className="text-sm text-gray-700/70">{post.date}</p>
-                      <h2 className="mt-2 text-xl font-semibold text-gray-900">
+                    <div className="text-gray-200 p-6">
+                      <p className="text-sm text-gray-200">{post.date}</p>
+                      <h2 className="mt-2 text-xl font-semibold text-gray-200">
                         {post.title}
                       </h2>
-                      <p className="mt-2 text-sm text-gray-800/90">
+                      <p className="mt-2 text-sm text-gray-200">
                         {post.description}
                       </p>
                     </div>

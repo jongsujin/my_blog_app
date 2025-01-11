@@ -5,9 +5,9 @@ export default function AboutPage() {
     return (
         <Background>
             <div className="mx-auto max-w-4xl p-6 md:p-8">
-                <h1 className="mb-8 text-4xl font-bold text-blue-300">About My Blog</h1>
+                <h1 className="mb-8 text-4xl font-bold text-black">About My Blog</h1>
 
-                <Card className="mb-8 bg-gradient-to-br from-blue-200 via-indigo-200 to-purple-200">
+                <Card className="mb-8">
                     <CardContent className="p-8">
                         <div className="flex flex-col md:flex-row gap-8 items-center">
                             <div className="w-full md:w-1/3">

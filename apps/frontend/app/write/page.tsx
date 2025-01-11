@@ -70,7 +70,7 @@ export default function WritePage() {
 
     return (
         <Background>
-            <div className="mx-auto max-w-4xl p-6 md:p-8">
+            <div className="mx-auto max-w-4xl h-full p-6 md:p-8">
                 {/* 제목 입력 */}
                 <input
                     type="text"
