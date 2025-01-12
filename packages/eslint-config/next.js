@@ -33,6 +33,8 @@ export const nextJsConfig = [
     rules: {
       ...pluginNext.configs.recommended.rules,
       ...pluginNext.configs["core-web-vitals"].rules,
+      "react/no-unescaped-entities": "off",
+      "@typescript-eslint/no-unused-vars": "warn"
     },
   },
   {
