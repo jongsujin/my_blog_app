@@ -1,7 +1,3 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import { Tag } from '../../shared/component/ui/Tag'
-import { Card, CardContent } from '../../shared/component/ui/Card'
 import Item from '@/shared/component/ui/Item'
 import Background from '@/shared/component/ui/Background'
 

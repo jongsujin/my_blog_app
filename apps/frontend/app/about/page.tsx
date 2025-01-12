@@ -30,13 +30,14 @@ export default function AboutPage() {
                             <div className="w-full md:w-2/3">
                                 <h2 className="text-2xl font-semibold text-textColor mb-4">Our Mission</h2>
                                 <p className="text-textColor mb-4">
-                                    Welcome to our blog! We're passionate about sharing knowledge and insights on UI design,
-                                    web development, and creative processes. Our goal is to inspire and educate designers
-                                    and developers at all stages of their careers.
+                                우리 블로그에 오신 것을 환영합니다! 우리는 UI 디자인에 대한 지식과 통찰력을 공유하는 데 열정을 갖고 있습니다.
+                                    웹 개발 및 창의적인 프로세스. 우리의 목표는 디자이너에게 영감을 주고 교육하는 것입니다.
+                                    경력의 모든 단계에 있는 개발자들입니다.
                                 </p>
                                 <p className="text-textColor">
-                                    Whether you're just starting out or you're a seasoned professional, we hope you'll find
-                                    valuable information and inspiration in our articles.
+                                  
+이제 막 시작하는 분이든 노련한 전문가이든 관계없이 다음을 찾으실 수 있기를 바랍니다.
+
                                 </p>
                             </div>
                         </div>

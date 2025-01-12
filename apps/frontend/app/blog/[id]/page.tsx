@@ -5,7 +5,6 @@ import CommentResponse from '@/shared/component/ui/Comment/CommentResponse'
 import { Tag } from '@/shared/component/ui/Tag'
 import { Post } from '@/types/post'
 import { ChevronLeft } from 'lucide-react'
-import Image from "next/image"
 import Link from "next/link"
 
 
