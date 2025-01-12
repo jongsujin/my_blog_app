@@ -113,8 +113,8 @@ export default function WritePage() {
                             className="bg-transparent text-textColor placeholder-textColor focus:outline-none min-w-10 "
                         />
                     </div>
-                    <Button content="임시저장" />
-                    <Button content="저장하기" />
+                    <Button content="임시저장" onClick={handleDraft} />
+                    <Button content="저장하기" onClick={handlePublish} />
                 </div>
             </div>
         </Background>
