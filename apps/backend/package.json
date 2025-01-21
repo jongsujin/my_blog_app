@@ -13,16 +13,27 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/morgan": "^1.9.9",
+    "@types/node-schedule": "^2.1.7",
+    "@types/nunjucks": "^3.2.6",
     "axios": "^1.7.9",
     "cheerio": "^1.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "express-serve-static-core": "^0.1.1",
     "express-validator": "^7.2.1",
-    "mysql2": "^3.12.0"
+    "http": "0.0.1-security",
+    "morgan": "^1.10.0",
+    "mysql2": "^3.12.0",
+    "node-schedule": "^2.1.1",
+    "nunjucks": "^3.2.4",
+    "tspec": "^0.1.116"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
+    "@types/express-serve-static-core": "^5.0.5",
     "@types/node": "^20",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.7.3"
