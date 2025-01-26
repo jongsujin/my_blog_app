@@ -3,6 +3,14 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+// 환경변수 확인 로그
+console.log('DB Config:', {
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT
+});
+
 export const dbConfig: PoolOptions = {
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
