@@ -1,1 +1,3 @@
-SELECT * FROM post WHERE user_id = $1;
+SELECT * FROM posts
+ORDER BY created_at DESC
+LIMIT ? OFFSET ?;

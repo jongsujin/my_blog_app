@@ -1,10 +1,23 @@
+"use client"
 import Link from "next/link"
 import { Card, CardContent } from "../shared/component/ui/Card"
 import Background from "@/shared/component/ui/Background"
 import DropDown from "@/shared/component/ui/DropDown"
+import { getPosts } from "@/api/post/api.server"
+import { useEffect } from "react"
 
 
 export default function BlogPage() {
+
+  const fetchPosts = async () => {
+    const posts = await getPosts(1,10);
+    console.log(posts);
+  }
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
   const posts = [
     {
       id: 1,

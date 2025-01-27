@@ -1,6 +1,9 @@
 "use client"
 
-import Select, { Theme } from "react-select"
+import dynamic from "next/dynamic"
+import  { Theme } from "react-select"
+
+const Select = dynamic(() => import('react-select'), { ssr: false })
 
 export default function DropDown() {
     const options = [

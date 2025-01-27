@@ -72,6 +72,9 @@ importers:
         specifier: ^0.1.116
         version: 0.1.116(@types/express@5.0.0)(express@4.21.2)
     devDependencies:
+      '@my-blog/types':
+        specifier: workspace:*
+        version: link:../types
       '@types/express':
         specifier: ^5.0.0
         version: 5.0.0
@@ -151,6 +154,12 @@ importers:
       typescript:
         specifier: ^5
         version: 5.5.4
+
+  apps/types:
+    dependencies:
+      typescript:
+        specifier: ^5.0.0
+        version: 5.7.3
 
   packages/eslint-config:
     devDependencies:
