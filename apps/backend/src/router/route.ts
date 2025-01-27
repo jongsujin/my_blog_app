@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getPostController } from "../domain/post/controller";
+import { getPostByIdController, getPostController } from "../domain/post/controller";
 
 const router = Router();
 
@@ -8,5 +8,6 @@ router.get("/", (req, res) => {
 })
 
 router.get("/posts", getPostController);
+router.get("/posts/:id", getPostByIdController);
 
 export default router;

@@ -1,4 +1,4 @@
-import { getPosts } from "./repository";
+import { getPost, getPosts } from "./repository";
 
 export const getPostService = async (page: number, limit: number) => {
     try {
@@ -6,5 +6,14 @@ export const getPostService = async (page: number, limit: number) => {
         return posts;
     } catch (error) {
         throw new Error('Failed to fetch posts');
+    }
+}
+
+export const getPostByIdService = async (id:number) => {
+    try {
+        const post = await getPost(id);
+        return post;
+    } catch (error) {
+        throw new Error('Failed to fetch post');
     }
 }

@@ -46,7 +46,7 @@ export default function AboutPage() {
 
                 <Card>
                     <CardContent className="p-8">
-                        <h2 className="text-2xl font-semibold text-textColor mb-4">What We Cover</h2>
+                        <h2 className="text-2xl font-semibold text-textColor mb-4">What I do</h2>
                         <ul className="list-disc list-inside text-textColor space-y-2">
                             <li>UI/UX Design Principles</li>
                             <li>Web Development Best Practices</li>

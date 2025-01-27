@@ -1,3 +1,4 @@
+import { getPostById } from '@/api/post/api.server'
 import Background from '@/shared/component/ui/Background'
 import { Card, CardContent } from '@/shared/component/ui/Card'
 import CommentForm from '@/shared/component/ui/Comment/CommentForm'
@@ -69,6 +70,9 @@ export default async function BlogPost({ params }: { params: Promise<{ id: strin
   const post = getPost((await params).id)
   const resolvedParams = await params;
   console.log(resolvedParams)
+
+  const postData = await getPostById(Number(resolvedParams.id));
+  console.log(postData)
   return (
     <Background>
       <div className="mx-auto max-w-4xl p-6 md:p-8">
@@ -86,13 +90,13 @@ export default async function BlogPost({ params }: { params: Promise<{ id: strin
           <Card>
             <CardContent className="p-8">
               <div className="space-y-4">
-                <p className="text-sm text-textColor">{post.date}</p>
+                <p className="text-sm text-textColor"> {new Date(postData.publishedAt).toLocaleDateString("ko-KR")}</p>
                 <h1 className="text-3xl font-bold tracking-tight text-textColor md:text-4xl lg:text-5xl">
-                  {post.title}
+                  {postData.title}
                 </h1>
-                <p className="text-xl text-textColor">{post.description}</p>
+                {/* <p className="text-xl text-textColor">{post.description}</p> */}
                 <div className="flex flex-wrap gap-2 pt-2">
-                  {post.tags.map((tag) => (
+                  {postData && postData.tags.map((tag: string) => (
                     <Tag key={tag} tag={tag} />
                   ))}
                 </div>
@@ -114,7 +118,7 @@ export default async function BlogPost({ params }: { params: Promise<{ id: strin
           {/* Content */}
           <Card>
             <CardContent className="prose prose-textColor max-w-none p-8 md:p-12">
-              {post.content.split('\n\n').map((paragraph, index) => (
+              {postData.content.split('\n\n').map((paragraph, index) => (
                 <p key={index} className="text-textColor">
                   {paragraph}
                 </p>
@@ -125,13 +129,13 @@ export default async function BlogPost({ params }: { params: Promise<{ id: strin
           {/* Navigation */}
           <div className="flex justify-between pt-8">
             <Link
-              href={`/blog/${post.id - 1}`}
-              className={`text-textColor hover:text-hoverColor ${post.id <= 1 ? 'invisible' : ''}`}
+              href={`/blog/${postData.id - 1}`}
+              className={`text-textColor hover:text-hoverColor ${postData.id <= 1 ? 'invisible' : ''}`}
             >
               ← Previous Post
             </Link>
             <Link
-              href={`/blog/${post.id + 1}`}
+              href={`/blog/${postData.id + 1}`}
               className="text-textColor hover:text-hoverColor"
             >
               Next Post →
