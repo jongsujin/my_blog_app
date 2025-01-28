@@ -1,0 +1,20 @@
+### POST /posts
+POST http://localhost:4000/api/posts
+Content-Type: application/json
+
+{
+    "title": "Test Post212",
+    "content": "<ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span>안녕하세요</li><li data-list=\"bullet\" class=\"ql-indent-1\"><span class=\"ql-ui\" contenteditable=\"false\"></span>반가워요 </li><li data-list=\"bullet\" class=\"ql-indent-2\"><span class=\"ql-ui\" contenteditable=\"false\"></span>다시만나</li></ol><div class=\"ql-code-block-container\" spellcheck=\"false\"><div class=\"ql-code-block ql-indent-1\">const res = console.log(\"hello\");</div></div><p><br></p><p><br></p>",
+    "slug": "test-post112145212345",
+    "tags": ["JavaScript", "React"]
+}
+
+### GET /posts
+GET http://localhost:4000/api/posts?page=1&limit=10
+Content-Type: application/json
+
+### GET /posts/id
+GET http://localhost:4000/api/posts/2
+Content-Type: application/json
+
+

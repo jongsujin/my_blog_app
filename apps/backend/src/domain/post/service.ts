@@ -24,6 +24,7 @@ export const createPostService = async (post: PostInitial) => {
         const newPost = await createPost(post);
         return newPost;
     } catch (error) {
+        console.error('Error in createPostService:', error);
         throw new Error('Failed to create post');
     }
 }

@@ -1,1 +1,1 @@
-SELECT id FROM tags WHERE name IN (?);
+SELECT id, name FROM tags WHERE name IN (?);

@@ -1,1 +1,1 @@
-INSERT INTO tags (name) VALUES (?);
+INSERT IGNORE INTO tags (name) VALUES (?);

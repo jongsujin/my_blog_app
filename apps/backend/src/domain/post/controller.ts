@@ -27,6 +27,7 @@ export const getPostByIdController = async (req: Request, res: Response) => {
 export const createPostController = async (req: Request, res: Response) => {
     try {
         const body = req.body;
+        console.log('Request body:', body);
         const newPost = await createPostService(body);
         res.status(201).json({message: 'Post created successfully', post: newPost});
     } catch (error) {
