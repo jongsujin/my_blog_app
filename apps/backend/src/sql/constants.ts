@@ -12,6 +12,7 @@ const SQL_PATH = {
     },
     TAGS: {
         INSERT_TAGS: path.join(__dirname, './tags/insert_tags.sql'),
+        SELECT_TAGS: path.join(__dirname, './tags/select_tag_my_blog_db.sql'),
     }
 };
 
@@ -26,5 +27,6 @@ export const SQL = {
     },
     TAGS: {
         INSERT_TAGS: readFileSync(SQL_PATH.TAGS.INSERT_TAGS, 'utf-8'),
+        SELECT_TAGS: readFileSync(SQL_PATH.TAGS.SELECT_TAGS, 'utf-8'),
     }
 }

@@ -75,7 +75,7 @@ export const createPost = async (post: PostInitial): Promise<Post> => {
     if(post.tags && post.tags.length > 0) {
         // 기존 태그 ID 조회
         const [tagRows] = await connection.execute(
-            'SELECT id FROM tags WHERE name IN (?)',
+            SQL.TAGS.SELECT_TAGS,
             [post.tags]
         );
         const tagValues = (tagRows as Tag[]).map(tag => [postId, tag.id]);
