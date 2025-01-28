@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "../shared/component/ui/Header";
+import { TanstackProvider } from "@/shared/Provider/TanstackProvider";
 
 
 const geistSans = Geist({
@@ -26,6 +27,7 @@ export default function RootLayout({
 }>) {
 
   return (
+    <TanstackProvider>
     <html lang="ko">
       {/* <head>
         <link rel="manifest" href="/manifest.json" />
@@ -37,8 +39,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Header />
-        {children}
-      </body>
-    </html>
+          {children}
+        </body>
+      </html>
+    </TanstackProvider>
   );
 }

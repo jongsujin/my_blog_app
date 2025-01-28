@@ -4,13 +4,27 @@ import { useState } from "react"
 import Editor from "../../shared/component/ui/Editor"
 import Background from "@/shared/component/ui/Background"
 import Button from "@/shared/component/ui/Button"
+import { useCreatePost } from "@/api/post/query.client"
+import { createSlug } from "@/util/createSlug"
 
 export default function WritePage() {
-    const [title, setTitle] = useState("")
-    const [content, setContent] = useState("")
-    const [tags, setTags] = useState<string[]>([])
-    const [currentTag, setCurrentTag] = useState("")
-
+    const [title, setTitle] = useState<string>("");
+    const [content, setContent] = useState<string>("");
+    const [tags, setTags] = useState<string[]>([]);
+    const [currentTag, setCurrentTag] = useState<string>("");
+    const post = {
+        title,
+        content,
+        tags,
+        thumbnail: "",
+        slug: createSlug(title),
+        publishedAt: new Date(),
+        viewCount: 0,
+    }
+    const {mutate: createPost} = useCreatePost(post);
+    const handleClickButton = () => {
+        createPost();
+    }
     console.log("content", content);
 
     // 태그 추가 함수
@@ -47,29 +61,7 @@ export default function WritePage() {
         }
     }
 
-    // 게시글 저장 함수
-    const handlePublish = async () => {
-        try {
-            if (!title.trim()) {
-                alert('제목을 입력해주세요.')
-                return
-            }
-            if (!content.trim()) {
-                alert('내용을 입력해주세요.')
-                return
-            }
 
-            // API 호출 로직 추가 예정
-            console.log('게시글 저장:', { title, content, tags })
-            alert('게시글이 저장되었습니다.')
-
-            // 저장 성공 후 임시저장 데이터 삭제
-            localStorage.removeItem('blogDraft')
-        } catch (error) {
-            console.error('저장 실패:', error)
-            alert('저장에 실패했습니다.')
-        }
-    }
 
     return (
         <Background>
@@ -116,7 +108,7 @@ export default function WritePage() {
                         />
                     </div>
                     <Button content="임시저장" onClick={handleDraft} />
-                    <Button content="저장하기" onClick={handlePublish} />
+                    <Button content="저장하기" onClick={handleClickButton} />
                 </div>
             </div>
         </Background>

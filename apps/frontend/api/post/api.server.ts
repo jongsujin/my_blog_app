@@ -1,6 +1,6 @@
 "use server"
 import { API, APIError } from "../instance"
-import {  Post } from '@my-blog/types';
+import {  Post, PostInitial } from '@my-blog/types';
 
 
 export const getPosts = async (page: number, limit: number) => {
@@ -27,5 +27,20 @@ export const getPostById = async (id: number) => {
 
     } catch (error) {
         throw new APIError(500, "Failed to fetch post");
+    }
+}
+
+
+export const createPost = async (post: PostInitial) => {
+    try {
+        const response = await fetch(`${API.baseURL}/api/posts`, {
+            method: "POST",
+            headers: API.headers,
+            body: JSON.stringify(post)
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        throw new APIError(500, "Failed to create post");
     }
 }
