@@ -3,10 +3,10 @@ export interface PostInitial {
   content: string;
   thumbnail?: string;
   tags: string[];
+  slug: string;
 }
 export interface Post extends PostInitial {
   id: number;
-  slug: string;
   publishedAt: Date;
   createdAt: Date;
   updatedAt: Date;
@@ -36,4 +36,9 @@ export interface ResponseProps<T> {
   content: T[];
   totalCount: number;
   hasPrevPage: boolean;
+}
+
+export interface Tag {
+  id: number;
+  name: string;
 }

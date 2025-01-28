@@ -1,5 +1,5 @@
 import {Request, Response } from "express";
-import { getPostByIdService, getPostService } from "./service";
+import { createPostService, getPostByIdService, getPostService } from "./service";
 
 export const getPostController = async (req: Request, res: Response) => {
     try {
@@ -21,5 +21,16 @@ export const getPostByIdController = async (req: Request, res: Response) => {
     } catch (error) {
         console.error('Error in getPostByIdController:', error);
         res.status(500).json({ message: 'Failed to fetch post' });
+    }
+}
+
+export const createPostController = async (req: Request, res: Response) => {
+    try {
+        const body = req.body;
+        const newPost = await createPostService(body);
+        res.status(201).json({message: 'Post created successfully', post: newPost});
+    } catch (error) {
+        console.error('Error in createPostController:', error);
+        res.status(500).json({message: 'Failed to create post'});
     }
 }

@@ -1,6 +1,6 @@
 import { db } from "../../config/database/database";
-import { ResponseProps, Post } from '@my-blog/types';
-import { RowDataPacket } from 'mysql2';
+import { ResponseProps, Post, PostInitial, Tag } from '@my-blog/types';
+import { ResultSetHeader, RowDataPacket } from 'mysql2';
 import { SQL } from "../../sql/constants";
 
 
@@ -55,4 +55,40 @@ export const getPost = async (id: number): Promise<Post> => {
     } catch (error) {
         throw error;
     }
+}
+
+export const createPost = async (post: PostInitial): Promise<Post> => {
+   return await db.transaction(async (connection) => {
+    // 1. 포스트 생성
+    const [postResult] = await connection.query<ResultSetHeader>(SQL.POST.INSERT_POST, [
+        post.title,
+        post.content,
+        post.slug,
+        post.thumbnail,
+        new Date(),  // published_at
+        new Date(),  // created_at
+        new Date(),  // updated_at
+        0  // view_count
+    ]);
+    const postId = postResult.insertId;
+    // 2. 태그 처리
+    if(post.tags && post.tags.length > 0) {
+        // 기존 태그 ID 조회
+        const [tagRows] = await connection.execute(
+            'SELECT id FROM tags WHERE name IN (?)',
+            [post.tags]
+        );
+        const tagValues = (tagRows as Tag[]).map(tag => [postId, tag.id]);
+        if(tagValues.length > 0) {
+            await connection.execute(SQL.POST.INSERT_POST_TAGS, [tagValues]);
+        }
+    }
+
+    // 3. 생성된 포스트 반환
+    const [posts] = await connection.execute<RowDataPacket[]>(SQL.POST.SELECT_POST_BY_ID, [postId]);
+    return {
+        ...(posts[0] as PostRow),
+        tags: (posts[0] as PostRow).tags?.split(',') ?? []
+    }  
+   })
 }

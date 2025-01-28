@@ -1,4 +1,5 @@
-import { getPost, getPosts } from "./repository";
+import { PostInitial } from "@my-blog/types";
+import { createPost, getPost, getPosts } from "./repository";
 
 export const getPostService = async (page: number, limit: number) => {
     try {
@@ -15,5 +16,14 @@ export const getPostByIdService = async (id:number) => {
         return post;
     } catch (error) {
         throw new Error('Failed to fetch post');
+    }
+}
+
+export const createPostService = async (post: PostInitial) => {
+    try {
+        const newPost = await createPost(post);
+        return newPost;
+    } catch (error) {
+        throw new Error('Failed to create post');
     }
 }
