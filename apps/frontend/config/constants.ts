@@ -33,11 +33,6 @@ export const HEADER_TAB_LIST = [
         title: "Tag",
         href: "/tag",
     },
-    {
-        id: 7,
-        title: "Write",
-        href: "/write",
-    }
 ]
 
 
