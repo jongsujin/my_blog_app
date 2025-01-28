@@ -11,6 +11,8 @@ export default function WritePage() {
     const [tags, setTags] = useState<string[]>([])
     const [currentTag, setCurrentTag] = useState("")
 
+    console.log("content", content);
+
     // 태그 추가 함수
     const handleAddTag = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter' && currentTag.trim()) {

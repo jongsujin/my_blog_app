@@ -4,51 +4,12 @@ import { Card, CardContent } from '@/shared/component/ui/Card'
 import CommentForm from '@/shared/component/ui/Comment/CommentForm'
 import CommentResponse from '@/shared/component/ui/Comment/CommentResponse'
 import { Tag } from '@/shared/component/ui/Tag'
-import { Post } from '@/types/post'
 import { ChevronLeft } from 'lucide-react'
 import Link from "next/link"
 
 
 
-// 실제 환경에서는 데이터베이스나 CMS에서 가져올 데이터입니다
-export const getPost = (id: string): Post => {
-  return {
-    id: parseInt(id),
-    title: "Understanding UI Design Principles",
-    date: "March 15, 2024",
-    description: "Learn the fundamental principles that guide effective user interface design and create better experiences.",
-    gradient: "from-blue-200 via-blue-100 to-white",
-    image: "/placeholder.svg?height=400&width=800",
-    content: `
-      Design is not just about making things look pretty – it's about solving problems and creating intuitive, 
-      enjoyable experiences for users. In this comprehensive guide, we'll explore the fundamental principles 
-      that every UI designer should know and understand.
 
-      Good design is about more than just aesthetics. It's about understanding your users, their needs, 
-      and how they interact with your product. When we talk about UI design principles, we're really 
-      talking about the guidelines that help us create interfaces that are both beautiful and functional.
-
-      Here are some key principles we'll explore:
-
-      1. Hierarchy
-      Visual hierarchy is about organizing elements by importance. This helps users understand your interface 
-      at a glance and know where to focus their attention.
-
-      2. Consistency
-      Consistent design creates familiarity and helps users navigate your interface more efficiently. This 
-      includes consistent use of colors, typography, spacing, and interaction patterns.
-
-      3. Feedback
-      Good interfaces provide clear feedback for user actions. This could be visual, auditory, or haptic 
-      feedback that lets users know their action has been recognized.
-
-      4. Simplicity
-      Keep your designs as simple as possible while still achieving their goals. Remove unnecessary elements 
-      and make sure every component serves a purpose.
-    `,
-    tags: ["Frontend", "Backend", "JavaScript"]
-  }
-}
 
 export default async function BlogPost({ params }: { params: Promise<{ id: string }> }) {
   const comments = [
@@ -64,10 +25,9 @@ export default async function BlogPost({ params }: { params: Promise<{ id: strin
       date: "2024. 12. 10",
       avatarUrl: "/path/to/avatar.jpg"
     },
-    // ... 더 많은 댓글들
+  
   ]
 
-  const post = getPost((await params).id)
   const resolvedParams = await params;
   console.log(resolvedParams)
 
@@ -96,7 +56,7 @@ export default async function BlogPost({ params }: { params: Promise<{ id: strin
                 </h1>
                 {/* <p className="text-xl text-textColor">{post.description}</p> */}
                 <div className="flex flex-wrap gap-2 pt-2">
-                  {postData && postData.tags.map((tag: string) => (
+                  {postData && postData.tags && postData.tags.map((tag: string) => (
                     <Tag key={tag} tag={tag} />
                   ))}
                 </div>
@@ -132,18 +92,18 @@ export default async function BlogPost({ params }: { params: Promise<{ id: strin
               href={`/blog/${postData.id - 1}`}
               className={`text-textColor hover:text-hoverColor ${postData.id <= 1 ? 'invisible' : ''}`}
             >
-              ← Previous Post
+              ← 이전 글
             </Link>
             <Link
               href={`/blog/${postData.id + 1}`}
               className="text-textColor hover:text-hoverColor"
             >
-              Next Post →
+              다음 글 →
             </Link>
           </div>
         </article>
         <div className="mt-8">
-          <h2 className="text-2xl font-bold text-textColor mb-6">Comments</h2>
+          <h2 className="text-2xl font-bold text-textColor mb-6">댓글</h2>
           <CommentForm />
 
           <div className="space-y-4">
