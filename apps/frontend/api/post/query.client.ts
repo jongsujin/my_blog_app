@@ -19,10 +19,10 @@ export const useGetPostById = (id: number) => {
 }
 
 // 게시글 생성
-export const useCreatePost = (post: PostInitial) => {
+export const useCreatePost = () => {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationFn: () => createPost(post),
+    mutationFn: (post: PostInitial) => createPost(post), // createPost 함수를 직접 호출하도록 수정
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['posts'] })
       alert('게시글 생성 완료')

@@ -28,7 +28,7 @@ export default function BlogPostContent({
       <div className="mx-auto max-w-4xl p-6 md:p-8">
         {/* Back Button */}
         <Link
-          href="/blog"
+          href="/"
           className="mb-8 inline-flex items-center text-sm text-textColor hover:text-hoverColor"
         >
           <ChevronLeft className="mr-1 h-4 w-4" />
