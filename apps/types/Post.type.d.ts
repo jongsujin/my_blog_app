@@ -28,6 +28,7 @@ export interface PostListDTO {
   tags: string[];
   publishedAt: Date;
   viewCount: number;
+  content: string;
 }
 
 export interface ResponseProps<T> {
