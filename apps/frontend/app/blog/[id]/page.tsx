@@ -5,33 +5,32 @@ import CommentForm from '@/shared/component/ui/Comment/CommentForm'
 import CommentResponse from '@/shared/component/ui/Comment/CommentResponse'
 import { Tag } from '@/shared/component/ui/Tag'
 import { ChevronLeft } from 'lucide-react'
-import Link from "next/link"
+import Link from 'next/link'
 
-
-
-
-
-export default async function BlogPost({ params }: { params: Promise<{ id: string }> }) {
+export default async function BlogPost({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}) {
   const comments = [
     {
-      author: "Fanta Jin",
-      content: "헉 안녕하세요! 아래에 글 남긴 달봄입니다.",
-      date: "2024. 12. 10",
-      avatarUrl: "/path/to/avatar.jpg"
+      author: 'Fanta Jin',
+      content: '헉 안녕하세요! 아래에 글 남긴 달봄입니다.',
+      date: '2024. 12. 10',
+      avatarUrl: '/path/to/avatar.jpg',
     },
     {
-      author: "Fanta Jin",
-      content: "헉 안녕하세요! 아래에 글 남긴 달봄입니다.",
-      date: "2024. 12. 10",
-      avatarUrl: "/path/to/avatar.jpg"
+      author: 'Fanta Jin',
+      content: '헉 안녕하세요! 아래에 글 남긴 달봄입니다.',
+      date: '2024. 12. 10',
+      avatarUrl: '/path/to/avatar.jpg',
     },
-  
   ]
 
-  const resolvedParams = await params;
+  const resolvedParams = await params
   console.log(resolvedParams)
 
-  const postData = await getPostById(Number(resolvedParams.id));
+  const postData = await getPostById(Number(resolvedParams.id))
   console.log(postData)
   return (
     <Background>
@@ -50,15 +49,20 @@ export default async function BlogPost({ params }: { params: Promise<{ id: strin
           <Card>
             <CardContent className="p-8">
               <div className="space-y-4">
-                <p className="text-sm text-textColor"> {new Date(postData.publishedAt).toLocaleDateString("ko-KR")}</p>
+                <p className="text-sm text-textColor">
+                  {' '}
+                  {new Date(postData.publishedAt).toLocaleDateString('ko-KR')}
+                </p>
                 <h1 className="text-3xl font-bold tracking-tight text-textColor md:text-4xl lg:text-5xl">
                   {postData.title}
                 </h1>
                 {/* <p className="text-xl text-textColor">{post.description}</p> */}
                 <div className="flex flex-wrap gap-2 pt-2">
-                  {postData && postData.tags && postData.tags.map((tag: string) => (
-                    <Tag key={tag} tag={tag} />
-                  ))}
+                  {postData &&
+                    postData.tags &&
+                    postData.tags.map((tag: string) => (
+                      <Tag key={tag} tag={tag} />
+                    ))}
                 </div>
               </div>
             </CardContent>
@@ -77,12 +81,13 @@ export default async function BlogPost({ params }: { params: Promise<{ id: strin
 
           {/* Content */}
           <Card>
-            <CardContent className="prose prose-textColor max-w-none p-8 md:p-12">
-              {postData.content.split('\n\n').map((paragraph, index) => (
-                <p key={index} className="text-textColor">
-                  {paragraph}
-                </p>
-              ))}
+            <CardContent className="p-8 md:p-12">
+              <div className="prose prose-lg prose-stone max-w-none dark:prose-invert">
+                <div
+                  dangerouslySetInnerHTML={{ __html: postData.content }}
+                  className="text-textColor [&_.ql-code-block]:rounded-md [&_.ql-code-block]:bg-gray-400 [&_.ql-code-block]:p-4 [&_.ql-code-block]:font-mono [&_.ql-code-block]:text-textColor [&_.ql-indent-1]:ml-4"
+                />
+              </div>
             </CardContent>
           </Card>
 
@@ -103,7 +108,7 @@ export default async function BlogPost({ params }: { params: Promise<{ id: strin
           </div>
         </article>
         <div className="mt-8">
-          <h2 className="text-2xl font-bold text-textColor mb-6">댓글</h2>
+          <h2 className="mb-6 text-2xl font-bold text-textColor">댓글</h2>
           <CommentForm />
 
           <div className="space-y-4">
@@ -119,9 +124,6 @@ export default async function BlogPost({ params }: { params: Promise<{ id: strin
           </div>
         </div>
       </div>
-
-
     </Background>
   )
 }
-

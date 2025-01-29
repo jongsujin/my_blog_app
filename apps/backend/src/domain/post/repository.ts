@@ -18,7 +18,15 @@ export const getPosts = async (page: number = 1, limit: number = 10): Promise<Re
         const totalCount = countResult[0].total;
       
         const formattedPosts = posts.map(post => ({
-            ...post,
+            id: post.id,
+            title: post.title,
+            content: post.content,
+            slug: post.slug,
+            thumbnail: post.thumbnail,
+            publishedAt: post.published_at,
+            createdAt: post.created_at,
+            updatedAt: post.updated_at,
+            viewCount: post.view_count,
             tags: post.tags ? post.tags.split(',') : []
         }));
 

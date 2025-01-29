@@ -24,6 +24,7 @@
     "@eslint/eslintrc": "^3",
     "@my-blog/types": "workspace:*",
     "@repo/eslint-config": "workspace:*",
+    "@tailwindcss/typography": "^0.5.16",
     "@tanstack/eslint-plugin-query": "^5.65.0",
     "@types/node": "^20",
     "@types/react": "^19",

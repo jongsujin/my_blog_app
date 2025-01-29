@@ -7,7 +7,7 @@ import { createPost, getPostById, getPosts } from "./api.server"
 
 // 게시글 전체 조회 
 export const useGetPosts = (page: number, limit: number) => {
-    return useQuery<ResponseProps<Post[]>>({
+    return useQuery<ResponseProps<PostListDTO>>({
         queryKey: ["posts"],
         queryFn: () => getPosts(page, limit)
     })
