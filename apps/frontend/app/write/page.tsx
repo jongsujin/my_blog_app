@@ -13,20 +13,21 @@ export default function WritePage() {
   const [tags, setTags] = useState<string[]>([])
   const [currentTag, setCurrentTag] = useState<string>('')
 
-  const { mutate: createPost } = useCreatePost()
+  const post = {
+    title,
+    content,
+    tags,
+    thumbnail: '',
+    slug: createSlug(title),
+    publishedAt: new Date(),
+    viewCount: 0,
+  }
+  const { mutate: createPost } = useCreatePost(post)
   const handleClickButton = () => {
-    const postData = {
-      title,
-      content,
-      tags,
-      thumbnail: '',
-      slug: createSlug(title),
-      publishedAt: new Date(),
-      viewCount: 0,
-    }
-    createPost(postData)
+    createPost()
   }
   console.log('content', content)
+  console.log('post', post)
 
   // 태그 추가 함수
   const handleAddTag = (e: React.KeyboardEvent<HTMLInputElement>) => {

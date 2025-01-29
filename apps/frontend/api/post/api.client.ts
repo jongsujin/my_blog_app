@@ -1,1 +1,22 @@
-// 페이지네이션 혹은 무한스크롤 시 가져오는 getPosts 함수
+import { API, APIError } from '../instance'
+import { PostInitial } from '@my-blog/types'
+
+export const createPost = async (post: PostInitial) => {
+  try {
+    const response = await fetch(`${API.baseURL}/api/posts`, {
+      method: 'POST',
+      headers: API.headers,
+      body: JSON.stringify(post),
+    })
+
+    if (!response.ok) {
+      throw new Error('Failed to create post')
+    }
+
+    const data = await response.json()
+    return data
+  } catch (error) {
+    console.error('Error in createPost:', error)
+    throw new APIError(500, 'Failed to create post')
+  }
+}

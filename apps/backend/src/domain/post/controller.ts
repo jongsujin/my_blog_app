@@ -6,13 +6,12 @@ import {
   getPostService,
 } from "./service";
 
-const storage = multer.diskStorage({
+export const storage = multer.diskStorage({
   destination: "uploads/posts",
   filename: function (req, file, cb) {
     cb(null, `${Date.now()}-${file.originalname}`);
   },
 });
-const upload = multer({ storage: storage });
 
 export const getPostController = async (req: Request, res: Response) => {
   try {
@@ -40,12 +39,12 @@ export const getPostByIdController = async (req: Request, res: Response) => {
 export const createPostController = async (req: Request, res: Response) => {
   try {
     const { title, content, tags, slug } = req.body;
-    const thumbnail = req.file?.filename; // 업로드된 파일명
+    const thumbnail = req.file?.filename;
 
     const newPost = await createPostService({
       title,
       content,
-      tags: JSON.parse(tags),
+      tags: Array.isArray(tags) ? tags : JSON.parse(tags), // 수정된 부분
       slug,
       thumbnail: thumbnail || "",
     });
@@ -57,5 +56,26 @@ export const createPostController = async (req: Request, res: Response) => {
   } catch (error) {
     console.error("Error in createPostController:", error);
     res.status(500).json({ message: "Failed to create post" });
+  }
+};
+
+export const uploadImageController = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    if (!req.file) {
+      res.status(400).json({ message: "No file uploaded" });
+      return;
+    }
+    const imageUrl = `/uploads/${req.file.filename}`;
+
+    res.status(200).json({
+      imageUrl,
+      message: "Image uploaded successfully",
+    });
+  } catch (error) {
+    console.error("Error in uploadImageController:", error);
+    res.status(500).json({ message: "Failed to upload image" });
   }
 };

@@ -1,6 +1,7 @@
 import { PostInitial, PostListDTO, ResponseProps } from '@my-blog/types'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { createPost, getPostById, getPosts } from './api.server'
+import { getPostById, getPosts } from './api.server'
+import { createPost } from './api.client'
 
 // 게시글 전체 조회
 export const useGetPosts = (page: number, limit: number) => {
@@ -18,11 +19,10 @@ export const useGetPostById = (id: number) => {
   })
 }
 
-// 게시글 생성
-export const useCreatePost = () => {
+export const useCreatePost = (post: PostInitial) => {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationFn: (post: PostInitial) => createPost(post), // createPost 함수를 직접 호출하도록 수정
+    mutationFn: () => createPost(post),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['posts'] })
       alert('게시글 생성 완료')

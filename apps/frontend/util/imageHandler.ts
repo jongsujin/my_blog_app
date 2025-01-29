@@ -1,24 +1,5 @@
+import { API } from '@/api/instance'
 import { Quill } from 'react-quill-new'
-
-const handleImageUpload = async (file: File) => {
-  const formData = new FormData()
-  formData.append('file', file)
-
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/upload`,
-      {
-        method: 'POST',
-        body: formData,
-      },
-    )
-    const data = await response.json()
-    return data.imageUrl
-  } catch (error) {
-    console.error('Error uploading image:', error)
-    return null
-  }
-}
 
 export async function imageHandler(this: { quill: Quill }) {
   const input = document.createElement('input')
@@ -29,13 +10,25 @@ export async function imageHandler(this: { quill: Quill }) {
   input.onchange = async () => {
     const file = input.files?.[0]
     if (file) {
-      const imageUrl = await handleImageUpload(file)
-      if (imageUrl) {
-        this.quill.insertEmbed(
-          this.quill.getSelection()?.index || 0,
-          'image',
-          imageUrl,
-        )
+      const formData = new FormData()
+      formData.append('file', file)
+
+      try {
+        const response = await fetch(`${API.baseURL}/api/upload`, {
+          method: 'POST',
+          body: formData,
+        })
+        const data = await response.json()
+
+        // 전체 URL 생성 (백엔드 서버 URL + 이미지 경로)
+        const imageUrl = `${API.baseURL}${data.imageUrl}`
+
+        // 현재 커서 위치에 이미지 삽입
+        const range = this.quill.getSelection(true)
+        this.quill.insertEmbed(range.index, 'image', imageUrl)
+        this.quill.setSelection(range.index + 1)
+      } catch (error) {
+        console.error('Error:', error)
       }
     }
   }
