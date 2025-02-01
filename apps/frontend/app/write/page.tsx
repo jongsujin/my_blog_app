@@ -6,6 +6,7 @@ import Background from '@/shared/component/ui/Background'
 import Button from '@/shared/component/ui/Button'
 import { useCreatePost } from '@/api/post/query.client'
 import { createSlug } from '@/util/createSlug'
+import { createThumbnailPath } from '@/util/createThumbnailPath'
 
 export default function WritePage() {
   const [title, setTitle] = useState<string>('')
@@ -17,7 +18,7 @@ export default function WritePage() {
     title,
     content,
     tags,
-    thumbnail: '',
+    thumbnail: createThumbnailPath(tags[0]),
     slug: createSlug(title),
     publishedAt: new Date(),
     viewCount: 0,

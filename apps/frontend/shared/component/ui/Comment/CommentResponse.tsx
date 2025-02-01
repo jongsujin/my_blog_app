@@ -1,29 +1,42 @@
+import Image from 'next/image'
+
 interface CommentResponseProps {
-    author: string
-    content: string
-    date: string
-    avatarUrl?: string
+  author: string
+  content: string
+  date: string
+  avatarUrl?: string
 }
 
-export default function CommentResponse({ author, content, date, avatarUrl }: CommentResponseProps) {
-    return (
-        <div className="flex space-x-4 p-4 bg-cardColor rounded-lg mb-4">
-            <div className="flex-shrink-0">
-                <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center">
-                    {avatarUrl ? (
-                        <img src={avatarUrl} alt={author} className="w-10 h-10 rounded-full" />
-                    ) : (
-                        <span className="text-white text-lg">{author[0]}</span>
-                    )}
-                </div>
-            </div>
-            <div className="flex-grow">
-                <div className="flex items-center justify-between mb-2">
-                    <span className="font-medium text-textColor">{author}</span>
-                    <span className="text-sm text-gray-400">{date}</span>
-                </div>
-                <p className="text-textColor">{content}</p>
-            </div>
+export default function CommentResponse({
+  author,
+  content,
+  date,
+  avatarUrl,
+}: CommentResponseProps) {
+  return (
+    <div className="mb-4 flex space-x-4 rounded-lg bg-cardColor p-4">
+      <div className="flex-shrink-0">
+        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500">
+          {avatarUrl ? (
+            <Image
+              src={avatarUrl}
+              alt={author}
+              className="h-10 w-10 rounded-full"
+              width={40}
+              height={40}
+            />
+          ) : (
+            <span className="text-lg text-white">{author[0]}</span>
+          )}
         </div>
-    )
+      </div>
+      <div className="flex-grow">
+        <div className="mb-2 flex items-center justify-between">
+          <span className="font-medium text-textColor">{author}</span>
+          <span className="text-sm text-gray-400">{date}</span>
+        </div>
+        <p className="text-textColor">{content}</p>
+      </div>
+    </div>
+  )
 }

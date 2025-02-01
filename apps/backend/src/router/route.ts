@@ -23,7 +23,7 @@ const router = Router();
 
 router.get("/posts", getPostController);
 router.get("/posts/:id", getPostByIdController);
-router.post("/posts", upload.single("thumbnail"), createPostController);
+router.post("/posts", createPostController);
 router.post("/upload", upload.single("file"), uploadImageController);
 
 export default router;

@@ -1,5 +1,6 @@
 'use client'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Card, CardContent } from '../shared/component/ui/Card'
 import Background from '@/shared/component/ui/Background'
 import DropDown from '@/shared/component/ui/DropDown'
@@ -36,14 +37,16 @@ export default function BlogPage() {
                 <CardContent className="p-0">
                   <div className="flex h-64 flex-col md:flex-row">
                     <div className={`w-full pr-5 md:w-1/3`}>
-                      {/* <Image
-            src={post.image}
-            alt={post.title}
-            width={300}
-            height={200}
-            className="rounded-lg object-cover w-full h-48"
-          /> */}
-                      <div className="h-full w-full bg-textColor"></div>
+                      <Image
+                        src={
+                          featuredPost.thumbnail || '/thumbnails/default.jpg'
+                        }
+                        alt={featuredPost.title}
+                        width={400}
+                        height={300}
+                        className="h-48 w-full rounded-lg object-cover"
+                        priority
+                      />
                     </div>
                     <div className="w-full p-8 md:w-2/3">
                       <p className="text-sm text-textColor">
@@ -75,14 +78,13 @@ export default function BlogPage() {
                   <Card className="h-[400px] transition-transform hover:scale-[1.02]">
                     <CardContent className="flex h-full flex-col p-0">
                       <div className="mb-2">
-                        {/* <Image
-                        src={post.image}
-                        alt={post.title}
-                        width={300}
-                        height={200}
-                        className="rounded-lg object-cover w-full h-40"
-                      /> */}
-                        <div className="h-48 w-full bg-textColor"></div>
+                        <Image
+                          src={post.thumbnail || '/thumbnails/default.jpg'}
+                          alt={post.title}
+                          width={400}
+                          height={300}
+                          className="h-40 w-full rounded-lg object-cover"
+                        />
                       </div>
                       <div className="p-6 text-textColor">
                         <p className="text-sm text-textColor">

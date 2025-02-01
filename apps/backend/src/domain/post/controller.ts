@@ -38,15 +38,14 @@ export const getPostByIdController = async (req: Request, res: Response) => {
 
 export const createPostController = async (req: Request, res: Response) => {
   try {
-    const { title, content, tags, slug } = req.body;
-    const thumbnail = req.file?.filename;
+    const { title, content, tags, slug, thumbnail } = req.body;
 
     const newPost = await createPostService({
       title,
       content,
       tags: Array.isArray(tags) ? tags : JSON.parse(tags), // 수정된 부분
       slug,
-      thumbnail: thumbnail || "",
+      thumbnail: thumbnail,
     });
 
     res.status(201).json({
