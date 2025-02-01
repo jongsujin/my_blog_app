@@ -7,6 +7,11 @@ interface PostRow extends Omit<Post, "tags">, RowDataPacket {
   tags: string | null;
 }
 
+interface TagRow extends RowDataPacket {
+  id: number;
+  name: string;
+}
+
 export const getPosts = async (
   page: number = 1,
   limit: number = 10
@@ -62,6 +67,15 @@ export const getPost = async (id: number): Promise<Post> => {
       updatedAt: posts[0].updated_at,
       viewCount: posts[0].view_count,
     };
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getTags = async () => {
+  try {
+    const [tags] = await db.query<TagRow[]>(SQL.TAGS.SELECT_ALL_TAGS);
+    return tags.map((tag) => tag.name);
   } catch (error) {
     throw error;
   }

@@ -3,6 +3,7 @@ import {
   createPostController,
   getPostByIdController,
   getPostController,
+  getTagsController,
   storage,
   uploadImageController,
 } from "../domain/post/controller";
@@ -24,6 +25,7 @@ const router = Router();
 router.get("/posts", getPostController);
 router.get("/posts/:id", getPostByIdController);
 router.post("/posts", createPostController);
+router.get("/tags", getTagsController);
 router.post("/upload", upload.single("file"), uploadImageController);
 
 export default router;

@@ -4,6 +4,7 @@ import {
   createPostService,
   getPostByIdService,
   getPostService,
+  getTagsService,
 } from "./service";
 
 export const storage = multer.diskStorage({
@@ -33,6 +34,16 @@ export const getPostByIdController = async (req: Request, res: Response) => {
   } catch (error) {
     console.error("Error in getPostByIdController:", error);
     res.status(500).json({ message: "Failed to fetch post" });
+  }
+};
+
+export const getTagsController = async (req: Request, res: Response) => {
+  try {
+    const tags = await getTagsService();
+    res.status(200).json(tags);
+  } catch (error) {
+    console.error("Error in getTagsController:", error);
+    res.status(500).json({ message: "Failed to fetch tags" });
   }
 };
 
