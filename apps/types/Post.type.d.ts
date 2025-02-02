@@ -1,5 +1,6 @@
 export interface PostInitial {
   title: string;
+  description?: string;
   content: string;
   thumbnail?: string;
   tags: string[];
@@ -23,6 +24,7 @@ export interface UpdatePostDTO extends Partial<PostInitial> {}
 export interface PostListDTO {
   id: number;
   title: string;
+  description?: string;
   slug: string;
   thumbnail?: string;
   tags: string[];

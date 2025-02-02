@@ -57,6 +57,9 @@ export default function BlogPage() {
                       <h2 className="mt-2 text-2xl font-bold text-textColor md:text-3xl">
                         {featuredPost.title}
                       </h2>
+                      <p className="mt-2 text-lg text-textColor">
+                        {featuredPost.description}
+                      </p>
                       <div className="mt-8 flex flex-row gap-2">
                         {featuredPost.tags &&
                           featuredPost.tags.map((tag: string) => (
@@ -95,6 +98,9 @@ export default function BlogPage() {
                         <h2 className="mt-2 text-xl font-semibold text-textColor">
                           {post.title}
                         </h2>
+                        <p className="mt-2 text-lg text-textColor">
+                          {post.description}
+                        </p>
                         <div className="mt-2 flex flex-row gap-2">
                           {post.tags &&
                             post.tags.map((tag: string) => (

@@ -17,7 +17,7 @@ export default function TagPage() {
         <h1 className="mb-8 text-center text-3xl font-bold text-textColor">
           태그 목록
         </h1>
-        <div className="mx-auto flex max-w-2xl flex-wrap justify-center gap-4">
+        <div className="mx-auto grid max-w-2xl grid-cols-3 justify-items-center gap-4">
           {data &&
             data.map((tag) => (
               <div

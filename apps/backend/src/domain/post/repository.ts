@@ -28,6 +28,7 @@ export const getPosts = async (
     const formattedPosts = posts.map((post) => ({
       id: post.id,
       title: post.title,
+      description: post.description,
       content: post.content,
       slug: post.slug,
       thumbnail: post.thumbnail,
@@ -58,6 +59,7 @@ export const getPost = async (id: number): Promise<Post> => {
     return {
       title: posts[0].title,
       content: posts[0].content,
+      description: posts[0].description,
       thumbnail: posts[0].thumbnail,
       id: posts[0].id,
       slug: posts[0].slug,
@@ -75,7 +77,7 @@ export const getPost = async (id: number): Promise<Post> => {
 export const getTags = async () => {
   try {
     const [tags] = await db.query<TagRow[]>(SQL.TAGS.SELECT_ALL_TAGS);
-    return tags.map((tag) => tag.name);
+    return tags;
   } catch (error) {
     throw error;
   }
@@ -89,6 +91,7 @@ export const createPost = async (post: PostInitial): Promise<Post> => {
       [
         post.title,
         post.content,
+        post.description,
         post.slug,
         post.thumbnail,
         new Date(), // published_at

@@ -49,10 +49,11 @@ export const getTagsController = async (req: Request, res: Response) => {
 
 export const createPostController = async (req: Request, res: Response) => {
   try {
-    const { title, content, tags, slug, thumbnail } = req.body;
+    const { title, content, tags, slug, thumbnail, description } = req.body;
 
     const newPost = await createPostService({
       title,
+      description,
       content,
       tags: Array.isArray(tags) ? tags : JSON.parse(tags), // 수정된 부분
       slug,

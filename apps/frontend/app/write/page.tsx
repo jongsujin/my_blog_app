@@ -10,12 +10,14 @@ import { createThumbnailPath } from '@/util/createThumbnailPath'
 
 export default function WritePage() {
   const [title, setTitle] = useState<string>('')
+  const [description, setDescription] = useState<string>('')
   const [content, setContent] = useState<string>('')
   const [tags, setTags] = useState<string[]>([])
   const [currentTag, setCurrentTag] = useState<string>('')
 
   const post = {
     title,
+    description,
     content,
     tags,
     thumbnail: createThumbnailPath(tags[0]),
@@ -73,6 +75,13 @@ export default function WritePage() {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="제목을 입력하세요..."
+          className="border-borderColor mb-4 w-full border bg-transparent p-2 text-textColor focus:outline-none focus:ring-2 focus:ring-hoverColor"
+        />
+        <input
+          type="text"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="부제목을 입력하세요..."
           className="border-borderColor mb-4 w-full border bg-transparent p-2 text-textColor focus:outline-none focus:ring-2 focus:ring-hoverColor"
         />
 
