@@ -74,6 +74,47 @@ export const getPost = async (id: number): Promise<Post> => {
   }
 };
 
+export const getPostsByTagId = async (
+  id: number,
+  page: number = 1,
+  limit: number = 10
+): Promise<ResponseProps<Post>> => {
+  try {
+    const offset = (page - 1) * limit;
+    const [posts] = await db.query<PostRow[]>(SQL.POST.SELECT_POSTS_BY_TAG_ID, [
+      id,
+      limit,
+      offset,
+    ]);
+    const [countResult] = await db.query(SQL.POST.COUNT_POSTS);
+    const totalCount = countResult[0].total;
+
+    const formattedPosts = posts.map((post) => ({
+      id: post.id,
+      title: post.title,
+      description: post.description,
+      content: post.content,
+      slug: post.slug,
+      thumbnail: post.thumbnail,
+      publishedAt: post.published_at,
+      createdAt: post.created_at,
+      updatedAt: post.updated_at,
+      viewCount: post.view_count,
+      tags: post.tags ? post.tags.split(",") : [],
+    }));
+
+    return {
+      page,
+      content: formattedPosts,
+      totalCount,
+      hasNextPage: offset + posts.length < totalCount,
+      hasPrevPage: page > 1,
+    };
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const getTags = async () => {
   try {
     const [tags] = await db.query<TagRow[]>(SQL.TAGS.SELECT_ALL_TAGS);

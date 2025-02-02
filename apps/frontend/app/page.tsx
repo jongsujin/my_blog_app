@@ -35,7 +35,7 @@ export default function BlogPage() {
                 className={`overflow-hidden transition-transform hover:scale-[1.02]`}
               >
                 <CardContent className="p-0">
-                  <div className="flex h-64 flex-col md:flex-row">
+                  <div className="flex h-full flex-col md:flex-row">
                     <div className={`w-full pr-5 md:w-1/3`}>
                       <Image
                         src={
@@ -78,7 +78,7 @@ export default function BlogPage() {
             {remainingPosts &&
               remainingPosts.map((post) => (
                 <Link key={post.id} href={`/blog/${post.id}`}>
-                  <Card className="h-[400px] transition-transform hover:scale-[1.02]">
+                  <Card className="h-full transition-transform hover:scale-[1.02]">
                     <CardContent className="flex h-full flex-col p-0">
                       <div className="mb-2">
                         <Image
@@ -87,6 +87,7 @@ export default function BlogPage() {
                           width={400}
                           height={300}
                           className="h-40 w-full rounded-lg object-cover"
+                          priority
                         />
                       </div>
                       <div className="p-6 text-textColor">

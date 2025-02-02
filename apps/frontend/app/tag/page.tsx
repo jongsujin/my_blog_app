@@ -3,13 +3,19 @@
 import { useGetTags } from '@/api/tag/query.client'
 import Background from '@/shared/component/ui/Background'
 import { Tag } from '@/shared/component/ui/Tag'
+import { useRouter } from 'next/navigation'
 
 export default function TagPage() {
   const { data, isLoading } = useGetTags()
+  const router = useRouter()
 
   if (isLoading) return <div>Loading...</div>
   if (!data) return <div>No data</div>
   console.log(data)
+
+  const handleTagClick = (id: number) => {
+    router.push(`/tag/${id}`)
+  }
 
   return (
     <Background>
@@ -24,7 +30,7 @@ export default function TagPage() {
                 key={tag.id}
                 className="transform transition-transform duration-200 hover:scale-110"
               >
-                <Tag tag={tag.name} />
+                <Tag tag={tag.name} id={tag.id} onClick={handleTagClick} />
               </div>
             ))}
         </div>

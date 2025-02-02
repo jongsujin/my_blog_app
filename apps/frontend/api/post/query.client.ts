@@ -1,6 +1,6 @@
 import { PostInitial, PostListDTO, ResponseProps } from '@my-blog/types'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { getPostById, getPosts } from './api.server'
+import { getPostById, getPosts, getPostsByTagId } from './api.server'
 import { createPost } from './api.client'
 import { useRouter } from 'next/navigation'
 
@@ -20,6 +20,7 @@ export const useGetPostById = (id: number) => {
   })
 }
 
+// 게시글 생성성
 export const useCreatePost = (post: PostInitial) => {
   const router = useRouter()
   const queryClient = useQueryClient()
@@ -33,5 +34,13 @@ export const useCreatePost = (post: PostInitial) => {
     onError: () => {
       alert('게시글 생성 실패')
     },
+  })
+}
+
+// 태그 아이디 기반 게시글 조회
+export const useGetPostsByTagId = (id: number, page: number, limit: number) => {
+  return useQuery<ResponseProps<PostListDTO>>({
+    queryKey: ['posts', id],
+    queryFn: () => getPostsByTagId(id, page, limit),
   })
 }

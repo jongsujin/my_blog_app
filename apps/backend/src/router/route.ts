@@ -3,6 +3,7 @@ import {
   createPostController,
   getPostByIdController,
   getPostController,
+  getPostsByTagIdController,
   getTagsController,
   storage,
   uploadImageController,
@@ -26,6 +27,7 @@ router.get("/posts", getPostController);
 router.get("/posts/:id", getPostByIdController);
 router.post("/posts", createPostController);
 router.get("/tags", getTagsController);
+router.get("/tags/:id", getPostsByTagIdController);
 router.post("/upload", upload.single("file"), uploadImageController);
 
 export default router;

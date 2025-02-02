@@ -1,5 +1,11 @@
 import { PostInitial } from "@my-blog/types";
-import { createPost, getPost, getPosts, getTags } from "./repository";
+import {
+  createPost,
+  getPost,
+  getPosts,
+  getPostsByTagId,
+  getTags,
+} from "./repository";
 
 export const getPostService = async (page: number, limit: number) => {
   try {
@@ -16,6 +22,19 @@ export const getPostByIdService = async (id: number) => {
     return post;
   } catch (error) {
     throw new Error("Failed to fetch post");
+  }
+};
+
+export const getPostsByTagIdService = async (
+  id: number,
+  page: number,
+  limit: number
+) => {
+  try {
+    const posts = await getPostsByTagId(id, page, limit);
+    return posts;
+  } catch (error) {
+    throw new Error("Failed to fetch posts by tag id");
   }
 };
 
