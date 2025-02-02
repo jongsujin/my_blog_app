@@ -23,6 +23,7 @@ export default function BlogPostContent({
   comments: CommentProps[]
 }) {
   const { data: postData } = useGetPostById(postId)
+  console.log('postData', postData)
   return (
     <Background>
       <div className="mx-auto max-w-4xl p-6 md:p-8">
@@ -47,7 +48,9 @@ export default function BlogPostContent({
                 <h1 className="text-3xl font-bold tracking-tight text-textColor md:text-4xl lg:text-5xl">
                   {postData?.title}
                 </h1>
-                {/* <p className="text-xl text-textColor">{post.description}</p> */}
+                <p className="text-xl text-textColor">
+                  {postData?.description}
+                </p>
                 <div className="flex flex-wrap gap-2 pt-2">
                   {postData &&
                     postData.tags &&

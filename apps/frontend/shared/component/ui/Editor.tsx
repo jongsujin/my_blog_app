@@ -3,8 +3,21 @@
 import dynamic from 'next/dynamic'
 import { useMemo } from 'react'
 import 'react-quill-new/dist/quill.snow.css'
+import { Quill } from 'react-quill-new'
+import hljs from 'highlight.js'
+import 'highlight.js/styles/vs2015.css'
+import { ImageResize } from 'quill-image-resize-module-ts'
 import { imageHandler } from '@/util/imageHandler'
 
+// 모듈 등록
+const Syntax = Quill.import('modules/syntax')
+Quill.register('modules/syntax', Syntax)
+Quill.register('modules/ImageResize', ImageResize)
+
+// highlight.js를 전역으로 설정
+if (typeof window !== 'undefined') {
+  window.hljs = hljs
+}
 interface EditorProps {
   value: string
   onChange: (value: string) => void
@@ -18,6 +31,9 @@ const ReactQuill = dynamic(() => import('react-quill-new'), {
 export default function Editor({ value, onChange }: EditorProps) {
   const modules = useMemo(
     () => ({
+      syntax: {
+        highlight: (text: string) => hljs.highlightAuto(text).value,
+      },
       toolbar: {
         container: [
           [{ header: [1, 2, 3, false] }],
@@ -32,9 +48,12 @@ export default function Editor({ value, onChange }: EditorProps) {
           ['clean'],
         ],
         handlers: {
-          // toolbar 내부에 handlers 추가
+          // toolbar 내부 핸들러
           image: imageHandler,
         },
+      },
+      ImageResize: {
+        modules: ['Resize', 'DisplaySize'],
       },
     }),
     [],
@@ -66,7 +85,7 @@ export default function Editor({ value, onChange }: EditorProps) {
         formats={formats}
         value={value}
         onChange={onChange}
-        className="h-full text-textColor [&_.ql-container]:h-[calc(100%-42px)] [&_.ql-editor]:text-textColor"
+        className="text-red [&_.ql-editor]:text-red h-full [&_.ql-container]:h-[calc(100%-42px)]"
       />
     </div>
   )
