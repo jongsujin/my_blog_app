@@ -2,10 +2,12 @@ import { Request, Response } from "express";
 import multer from "multer";
 import {
   createPostService,
+  deletePostService,
   getPostByIdService,
   getPostsByTagIdService,
   getPostService,
   getTagsService,
+  updatePostService,
 } from "./service";
 
 export const storage = multer.diskStorage({
@@ -105,5 +107,34 @@ export const uploadImageController = async (
   } catch (error) {
     console.error("Error in uploadImageController:", error);
     res.status(500).json({ message: "Failed to upload image" });
+  }
+};
+
+export const updatePostController = async (req: Request, res: Response) => {
+  try {
+    const id = Number(req.params.id);
+    const post = req.body;
+    const updatedPost = await updatePostService(id, post);
+    res.status(200).json({
+      message: "Post updated successfully",
+      post: updatedPost,
+    });
+  } catch (error) {
+    console.error("Error in updatePostController:", error);
+    res.status(500).json({ message: "Failed to update post" });
+  }
+};
+
+export const deletePostController = async (req: Request, res: Response) => {
+  try {
+    const id = Number(req.params.id);
+    const deletedPost = await deletePostService(id);
+    res.status(200).json({
+      message: "Post deleted successfully",
+      post: deletedPost,
+    });
+  } catch (error) {
+    console.error("Error in deletePostController:", error);
+    res.status(500).json({ message: "Failed to delete post" });
   }
 };

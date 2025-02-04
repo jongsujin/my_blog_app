@@ -4,20 +4,18 @@ import dynamic from 'next/dynamic'
 import { useMemo } from 'react'
 import 'react-quill-new/dist/quill.snow.css'
 import { Quill } from 'react-quill-new'
-import hljs from 'highlight.js'
+// import hljs from 'highlight.js'
 import 'highlight.js/styles/vs2015.css'
 import { ImageResize } from 'quill-image-resize-module-ts'
 import { imageHandler } from '@/util/imageHandler'
 
-// 모듈 등록
+// 언어 등록
+
+// Quill 모듈 설정
 const Syntax = Quill.import('modules/syntax')
 Quill.register('modules/syntax', Syntax)
 Quill.register('modules/ImageResize', ImageResize)
 
-// highlight.js를 전역으로 설정
-if (typeof window !== 'undefined') {
-  window.hljs = hljs
-}
 interface EditorProps {
   value: string
   onChange: (value: string) => void
@@ -31,9 +29,6 @@ const ReactQuill = dynamic(() => import('react-quill-new'), {
 export default function Editor({ value, onChange }: EditorProps) {
   const modules = useMemo(
     () => ({
-      syntax: {
-        highlight: (text: string) => hljs.highlightAuto(text).value,
-      },
       toolbar: {
         container: [
           [{ header: [1, 2, 3, false] }],
@@ -48,7 +43,6 @@ export default function Editor({ value, onChange }: EditorProps) {
           ['clean'],
         ],
         handlers: {
-          // toolbar 내부 핸들러
           image: imageHandler,
         },
       },

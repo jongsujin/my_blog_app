@@ -174,3 +174,65 @@ export const createPost = async (post: PostInitial): Promise<Post> => {
     };
   });
 };
+
+export const updatePost = async (
+  id: number,
+  post: PostInitial
+): Promise<Post> => {
+  return await db.transaction(async (connection) => {
+    // 1. 포스트 업데이트
+    await connection.query<ResultSetHeader>(SQL.POST.UPDATE_POST, [
+      post.title,
+      post.content,
+      post.description,
+      post.slug,
+      post.thumbnail,
+      new Date(), // updated_at
+      id,
+    ]);
+
+    // 2. 기존 태그 관계 삭제
+    await connection.execute(SQL.POST.DELETE_POST_TAGS, [id]);
+
+    // 3. 태그 처리
+    if (post.tags && post.tags.length > 0) {
+      // 각 태그에 대해 이미 존재하면 무시하고 생성
+      for (const tagName of post.tags) {
+        await connection.execute(SQL.TAGS.INSERT_TAGS, [tagName]);
+      }
+
+      // 태그 ID 조회
+      const placeholders = post.tags.map(() => "?").join(",");
+      const [tagRows] = await connection.execute<RowDataPacket[]>(
+        `SELECT id, name FROM tags WHERE name IN (${placeholders})`,
+        post.tags
+      );
+
+      // post_tags 테이블에 관계 추가
+      for (const tag of tagRows as Tag[]) {
+        await connection.execute(SQL.POST.INSERT_POST_TAGS, [id, tag.id]);
+      }
+    }
+
+    // 4. 업데이트된 포스트 반환
+    const [posts] = await connection.execute<RowDataPacket[]>(
+      SQL.POST.SELECT_POST_BY_ID,
+      [id]
+    );
+    return {
+      ...(posts[0] as PostRow),
+      tags: (posts[0] as PostRow).tags?.split(",") ?? [],
+    };
+  });
+};
+
+export const deletePost = async (id: number) => {
+  try {
+    const [result] = await db.query<RowDataPacket[]>(SQL.POST.DELETE_POST, [
+      id,
+    ]);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};

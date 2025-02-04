@@ -1,11 +1,13 @@
 import { Router } from "express";
 import {
   createPostController,
+  deletePostController,
   getPostByIdController,
   getPostController,
   getPostsByTagIdController,
   getTagsController,
   storage,
+  updatePostController,
   uploadImageController,
 } from "../domain/post/controller";
 import multer from "multer";
@@ -29,5 +31,7 @@ router.post("/posts", createPostController);
 router.get("/tags", getTagsController);
 router.get("/tags/:id", getPostsByTagIdController);
 router.post("/upload", upload.single("file"), uploadImageController);
+router.put("/posts/:id", updatePostController);
+router.delete("/posts/:id", deletePostController);
 
 export default router;

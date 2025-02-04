@@ -16,7 +16,11 @@ const SQL_PATH = {
     ),
     INSERT_POST: path.join(__dirname, "./post/insert_post_my_blog_db.sql"),
     INSERT_POST_TAGS: path.join(__dirname, "./post/insert_post_tags.sql"),
+    UPDATE_POST: path.join(__dirname, "./post/update_post_my_blog_db.sql"),
+    DELETE_POST: path.join(__dirname, "./post/delete_post_my_blog_db.sql"),
+    DELETE_POST_TAGS: path.join(__dirname, "./post/delete_post_tags.sql"),
   },
+
   TAGS: {
     INSERT_TAGS: path.join(__dirname, "./tags/insert_tags.sql"),
     SELECT_TAGS: path.join(__dirname, "./tags/select_tag_my_blog_db.sql"),
@@ -36,6 +40,9 @@ export const SQL = {
       SQL_PATH.POST.SELECT_POSTS_BY_TAG_ID,
       "utf-8"
     ),
+    UPDATE_POST: readFileSync(SQL_PATH.POST.UPDATE_POST, "utf-8"),
+    DELETE_POST: readFileSync(SQL_PATH.POST.DELETE_POST, "utf-8"),
+    DELETE_POST_TAGS: readFileSync(SQL_PATH.POST.DELETE_POST_TAGS, "utf-8"),
   },
   TAGS: {
     INSERT_TAGS: readFileSync(SQL_PATH.TAGS.INSERT_TAGS, "utf-8"),
