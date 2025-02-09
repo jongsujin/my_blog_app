@@ -1,5 +1,10 @@
 import { PostInitial, PostListDTO, ResponseProps } from '@my-blog/types'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query'
 import { getPostById, getPosts, getPostsByTagId } from './api.server'
 import { createPost } from './api.client'
 import { useRouter } from 'next/navigation'
@@ -42,5 +47,17 @@ export const useGetPostsByTagId = (id: number, page: number, limit: number) => {
   return useQuery<ResponseProps<PostListDTO>>({
     queryKey: ['posts', id],
     queryFn: () => getPostsByTagId(id, page, limit),
+  })
+}
+
+// 게시글 무한 스크롤 조회
+export const useGetPostsByInfiniteScroll = (page: number, limit: number) => {
+  return useInfiniteQuery({
+    queryKey: ['posts'],
+    queryFn: () => getPosts(page, limit),
+    getNextPageParam: (lastPage) => {
+      return lastPage.data.nextPage
+    },
+    initialPageParam: 1,
   })
 }
