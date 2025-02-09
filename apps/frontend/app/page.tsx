@@ -8,9 +8,9 @@ import { useGetPosts } from '@/api/post/query.client'
 import { Tag } from '@/shared/component/ui/Tag'
 
 export default function BlogPage() {
-  const { data, isLoading } = useGetPosts(1, 3)
+  const { data, isLoading } = useGetPosts(1, 10)
 
-  console.log(data)
+  console.log(data?.content)
 
   if (isLoading) return <div>로딩중...</div>
 
