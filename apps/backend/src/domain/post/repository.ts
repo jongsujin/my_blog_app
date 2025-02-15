@@ -192,7 +192,7 @@ export const updatePost = async (
     ]);
 
     // 2. 기존 태그 관계 삭제
-    await connection.execute(SQL.POST.DELETE_POST_TAGS, [id]);
+    await connection.execute(SQL.TAGS.DELETE_POST_TAGS, [id]);
 
     // 3. 태그 처리
     if (post.tags && post.tags.length > 0) {
