@@ -1,14 +1,17 @@
 'use client'
 
 import { useState } from 'react'
-
+import dynamic from 'next/dynamic'
 import Background from '@/shared/component/ui/Background'
 import Button from '@/shared/component/ui/Button'
 import { useCreatePost } from '@/api/post/query.client'
 import { createSlug } from '@/util/createSlug'
 import { createThumbnailPath } from '@/util/createThumbnailPath'
-import Editor from '@/shared/component/ui/Editor/Editor'
 
+// Editor를 dynamic import로 변경
+const Editor = dynamic(() => import('@/shared/component/ui/Editor/Editor'), {
+  ssr: false, // 서버 사이드 렌더링 비활성화
+})
 export default function WritePage() {
   const [title, setTitle] = useState<string>('')
   const [description, setDescription] = useState<string>('')
