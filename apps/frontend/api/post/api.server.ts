@@ -1,4 +1,4 @@
-'use server'
+// 'use server'
 import { API, APIError } from '../instance'
 import { Post } from '@my-blog/types'
 
