@@ -11,7 +11,7 @@ Content-Type: application/json
 }
 
 ### GET /posts
-GET http://localhost:4000/api/posts?page=1&limit=10
+GET http://localhost:4000/api/posts?page=1&limit=2
 Content-Type: application/json
 
 ### GET /posts/id
