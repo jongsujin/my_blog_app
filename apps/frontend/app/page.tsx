@@ -1,25 +1,50 @@
 'use client'
+
+import { useEffect } from 'react'
+import { useInView } from 'react-intersection-observer'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Card, CardContent } from '../shared/component/ui/Card'
 import Background from '@/shared/component/ui/Background'
 import DropDown from '@/shared/component/ui/DropDown'
-import { useGetPosts } from '@/api/post/query.client'
+import { useGetPostsByInfiniteScroll } from '@/api/post/query.client'
 import { Tag } from '@/shared/component/ui/Tag'
+import PostSkeleton from '@/shared/component/ui/Skeleton/PostSkeleton'
 
 export default function BlogPage() {
-  const { data, isLoading } = useGetPosts(1, 10)
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
+    useGetPostsByInfiniteScroll()
 
-  console.log(data?.content)
+  const { ref, inView } = useInView({
+    threshold: 0,
+  })
 
-  if (isLoading) return <div>로딩중...</div>
+  useEffect(() => {
+    if (inView && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage()
+    }
+  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage])
 
-  const featuredPost = data?.content[0]
-  const remainingPosts = data?.content.slice(1)
+  if (isLoading) {
+    return (
+      <Background>
+        <div className="mx-auto max-w-6xl p-6 md:p-8">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {[1, 2, 3].map((i) => (
+              <PostSkeleton key={i} />
+            ))}
+          </div>
+        </div>
+      </Background>
+    )
+  }
+
+  const allPosts = data?.pages.flatMap((page) => page.content) ?? []
+  const featuredPost = allPosts[0]
+  const remainingPosts = allPosts.slice(1)
 
   return (
     <Background>
-      {/* Content Section */}
       <div className="mx-auto max-w-6xl p-6 md:p-8">
         <div className="mb-6 flex w-full justify-end rounded-md p-1">
           <div className="flex-1"></div>
@@ -75,44 +100,49 @@ export default function BlogPage() {
 
           {/* Grid of Posts */}
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {remainingPosts &&
-              remainingPosts.map((post) => (
-                <Link key={post.id} href={`/blog/${post.id}`}>
-                  <Card className="h-full transition-transform hover:scale-[1.02]">
-                    <CardContent className="flex h-full flex-col p-0">
-                      <div className="mb-2">
-                        <Image
-                          src={post.thumbnail || '/thumbnails/default.jpg'}
-                          alt={post.title}
-                          width={400}
-                          height={300}
-                          className="h-40 w-full rounded-lg object-cover"
-                          priority
-                        />
+            {remainingPosts.map((post) => (
+              <Link key={post.id} href={`/blog/${post.id}`}>
+                <Card className="h-full transition-transform hover:scale-[1.02]">
+                  <CardContent className="flex h-full flex-col p-0">
+                    <div className="mb-2">
+                      <Image
+                        src={post.thumbnail || '/thumbnails/default.jpg'}
+                        alt={post.title}
+                        width={400}
+                        height={300}
+                        className="h-40 w-full rounded-lg object-cover"
+                        priority
+                      />
+                    </div>
+                    <div className="p-6 text-textColor">
+                      <p className="text-sm">
+                        {new Date(post.publishedAt).toLocaleDateString('ko-KR')}
+                      </p>
+                      <h2 className="mt-2 text-xl font-semibold">
+                        {post.title}
+                      </h2>
+                      <p className="mt-2 text-lg">{post.description}</p>
+                      <div className="mt-2 flex flex-wrap gap-2">
+                        {post.tags?.map((tag: string) => (
+                          <Tag key={tag} tag={tag} />
+                        ))}
                       </div>
-                      <div className="p-6 text-textColor">
-                        <p className="text-sm text-textColor">
-                          {new Date(post.publishedAt).toLocaleDateString(
-                            'ko-KR',
-                          )}
-                        </p>
-                        <h2 className="mt-2 text-xl font-semibold text-textColor">
-                          {post.title}
-                        </h2>
-                        <p className="mt-2 text-lg text-textColor">
-                          {post.description}
-                        </p>
-                        <div className="mt-2 flex flex-row gap-2">
-                          {post.tags &&
-                            post.tags.map((tag: string) => (
-                              <Tag key={tag} tag={tag} />
-                            ))}
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+
+          {/* Loading More Indicator */}
+          <div ref={ref} className="mt-8">
+            {isFetchingNextPage && (
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {[1, 2, 3].map((i) => (
+                  <PostSkeleton key={i} />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

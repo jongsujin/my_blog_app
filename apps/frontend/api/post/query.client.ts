@@ -51,12 +51,13 @@ export const useGetPostsByTagId = (id: number, page: number, limit: number) => {
 }
 
 // 게시글 무한 스크롤 조회
-export const useGetPostsByInfiniteScroll = (page: number, limit: number) => {
+export const useGetPostsByInfiniteScroll = () => {
   return useInfiniteQuery({
-    queryKey: ['posts'],
-    queryFn: () => getPosts(page, limit),
+    queryKey: ['posts', 'infinite'],
+    queryFn: ({ pageParam = 1 }) => getPosts(pageParam, 3),
     getNextPageParam: (lastPage) => {
-      return lastPage.data.nextPage
+      if (!lastPage || !lastPage.content) return undefined
+      return lastPage.hasNextPage ? lastPage.page + 1 : undefined
     },
     initialPageParam: 1,
   })
