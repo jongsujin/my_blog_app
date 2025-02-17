@@ -6,7 +6,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Card, CardContent } from '../shared/component/ui/Card'
 import Background from '@/shared/component/ui/Background'
-import DropDown from '@/shared/component/ui/DropDown'
 import { useGetPostsByInfiniteScroll } from '@/api/post/query.client'
 import { Tag } from '@/shared/component/ui/Tag'
 import PostSkeleton from '@/shared/component/ui/Skeleton/PostSkeleton'
@@ -46,12 +45,6 @@ export default function BlogPage() {
   return (
     <Background>
       <div className="mx-auto max-w-6xl p-6 md:p-8">
-        <div className="mb-6 flex w-full justify-end rounded-md p-1">
-          <div className="flex-1"></div>
-          <div className="flex-0">
-            <DropDown />
-          </div>
-        </div>
         <div className="space-y-8">
           {/* Featured Post */}
           {featuredPost && (
