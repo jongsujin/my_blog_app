@@ -1,5 +1,6 @@
 import { PostInitial, PostListDTO, ResponseProps } from '@my-blog/types'
 import {
+  InfiniteData,
   useInfiniteQuery,
   useMutation,
   useQuery,
@@ -51,14 +52,17 @@ export const useGetPostsByTagId = (id: number, page: number, limit: number) => {
 }
 
 // 게시글 무한 스크롤 조회
-export const useGetPostsByInfiniteScroll = () => {
+export const useGetPostsByInfiniteScroll = (options?: {
+  initialData?: InfiniteData<ResponseProps<PostListDTO>>
+}) => {
   return useInfiniteQuery({
     queryKey: ['posts', 'infinite'],
-    queryFn: ({ pageParam = 1 }) => getPosts(pageParam, 3),
-    getNextPageParam: (lastPage) => {
-      if (!lastPage || !lastPage.content) return undefined
-      return lastPage.hasNextPage ? lastPage.page + 1 : undefined
+    queryFn: ({ pageParam = 1 }) => getPosts(pageParam as number, 3),
+    getNextPageParam: (lastPage: ResponseProps<PostListDTO>) => {
+      if (!lastPage?.content) return undefined
+      return lastPage.hasNextPage ? (lastPage.page as number) + 1 : undefined
     },
     initialPageParam: 1,
+    initialData: options?.initialData,
   })
 }
